@@ -117,8 +117,12 @@
     @apply border-border outline-ring/50;
   }
   body {
-    /* Force a black background and white default text for future content. Using plain CSS here avoids @apply-related linter issues in this rule. */
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--background);
+    color: var(--foreground);
   }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
