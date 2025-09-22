@@ -1,15 +1,24 @@
 "use client";
 import React from "react";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
+import { FlipWords } from "@/components/ui/flip-words";
 
 export default function Home() {
   const heroWords = [
     { text: "Welcome", className: "text-foreground" },
     { text: "to", className: "text-foreground" },
     { text: "Tze Foong's", className: "text-foreground" },
-    { text: "Portfolio.", className: "text-foreground" },
+    // { text: "Portfolio.", className: "text-foreground" },
+  ];
+
+  const flipWords = [
+    " Portfolio.",
+    " Playground.",
+    " Showcase.",
+    " Creations.",
+    " Adventures.",
   ];
 
   // Track current theme by observing the root html class
@@ -55,10 +64,35 @@ export default function Home() {
             />
           </div>
 
-          {/* Right: Typewriter */}
-          <div className="flex w-full flex-col items-start justify-center text-left">
-            <TypewriterEffectSmooth words={heroWords} />
+          {/* Right: Flip Words */}
+          <div className="flex w-full flex-col items-start justify-center text-left gap-6">
+            <div className=" items-end gap-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+              Welcome to <br />
+              Tze Foong's 
+              <FlipWords
+                words={flipWords}
+                className="px-0 text-inherit font-semibold tracking-tight"
+              />
+            </div>
+
+            <hr className="animated-divider border-3 border-muted-foreground" />
+
+            <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70">
+              Full Stack Developer
+            </div>
+            
+            <div className="gap-4 flex">
+              <button className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
+                Explore my work
+              </button>
+
+              <button className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
+                My Projects
+              </button>
+            </div>
           </div>
+
+
         </div>
       </section>
     </>
