@@ -5,6 +5,7 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { FlipWords } from "@/components/ui/flip-words";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Timeline } from "@/components/ui/timeline";
+import { BriefcaseIcon } from "lucide-react";
 
 export default function Home() {
   // =========================
@@ -38,46 +39,7 @@ export default function Home() {
   // =============================
   const timelineData = [
     {
-      title: "2025",
-      titleDescription: "Present",
-      content: (
-        <div>
-          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
-            Vice President
-          </h4>
-          <p className="text-sm md:text-base text-foreground/60 mb-3">Raffles Hall Developers · Singapore</p>
-          <div className="space-y-2">
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              I host programming workshops and hackathons to help residents learn and apply their skills.
-            </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Software Engineering lead responsible for building, managing, and deploying applications and Telegram bots used by 700+ hall residents.
-            </p>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "2025",
-      titleDescription: "Present",
-      content: (
-        <div>
-          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
-            Frontend Engineer
-          </h4>
-          <p className="text-sm md:text-base text-foreground/60 mb-3">Freelance Total Rewards Pte Ltd · Singapore</p>
-          <div className="space-y-2">
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Implemented frontend website and FastAPI endpoints connecting backend to frontend.
-            </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Created a dashboard for intuitive data visualisation of running backend scripts.
-            </p>
-          </div>
-        </div>
-      ),
-    },
-    {
+      icon: <img src="/keyreply-logo.jpeg" alt="KeyReply"/>,
       title: "2025",
       titleDescription: "June - August",
       content: (
@@ -101,6 +63,49 @@ export default function Home() {
       ),
     },
     {
+      icon: <img src="/rhdevs-logo.jpeg" alt="Raffles Hall Developers"/>,
+      title: "2025",
+      titleDescription: "Present",
+      content: (
+        <div>
+          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
+            Vice President
+          </h4>
+          <p className="text-sm md:text-base text-foreground/60 mb-3">Raffles Hall Developers · Singapore</p>
+          <div className="space-y-2">
+            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
+              I host programming workshops and hackathons to help residents learn and apply their skills.
+            </p>
+            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
+              Software Engineering lead responsible for building, managing, and deploying applications and Telegram bots used by 700+ hall residents.
+            </p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      icon: <BriefcaseIcon />,
+      title: "2025",
+      titleDescription: "Present",
+      content: (
+        <div>
+          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
+            Frontend Engineer
+          </h4>
+          <p className="text-sm md:text-base text-foreground/60 mb-3">Freelance Total Rewards Pte Ltd · Singapore</p>
+          <div className="space-y-2">
+            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
+              Implemented frontend website and FastAPI endpoints connecting backend to frontend.
+            </p>
+            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
+              Created a dashboard for intuitive data visualisation of running backend scripts.
+            </p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      icon: <img src="/foo_well_home-logo.jpg" alt="Foo Well Home"/>,
       title: "2024",
       titleDescription: "April - June",
       content: (

@@ -11,6 +11,7 @@ interface TimelineEntry {
   title: string;
   titleDescription: string;
   content: React.ReactNode;
+  icon?: React.ReactNode; // optional icon/logo for the marker
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
@@ -54,8 +55,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
             className={`flex justify-start pt-10 ${index == 0 ? "md:pt-30" : "md:pt-40"} md:gap-10`}
           >
             <div className="sticky flex flex-col z-40 items-start top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-              <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
+              <div className="h-12 w-12 absolute left-2 md:left-2 rounded-full bg-white dark:bg-black flex items-center justify-center overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
+                {item.icon}
               </div>
               <h3 className="hidden md:block text-3xl sm:text-4xl lg:text-5xl md:pl-20 font-bold text-neutral-500 dark:text-neutral-500 ">
                 {item.title}
