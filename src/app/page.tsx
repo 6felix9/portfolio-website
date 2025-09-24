@@ -40,7 +40,7 @@ export default function Home() {
 
       {/* Hero: Pixelated image left, Typewriter right */}
       <section className="relative mx-auto w-full max-w-7xl px-4 md:px-6 pt-24">
-        <div className="grid min-h-[70vh] grid-cols-1 items-center gap-10 md:grid-cols-2">
+        <div className="grid h-[80vh] grid-cols-1 items-center gap-10 md:grid-cols-2">
           {/* Left: Pixelated Canvas */}
           <div className="flex w-full items-center justify-center">
             <PixelatedCanvas
