@@ -5,6 +5,7 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { FlipWords } from "@/components/ui/flip-words";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Timeline } from "@/components/ui/timeline";
+import { LinkPreview } from "@/components/ui/link-preview";
 import { BriefcaseIcon } from "lucide-react";
 
 export default function Home() {
@@ -43,21 +44,39 @@ export default function Home() {
       title: "2025",
       titleDescription: "June - August",
       content: (
-        <div>
-          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
-            AI & Software Engineer
-          </h4>
-          <p className="text-sm md:text-base text-foreground/60 mb-3">KeyReply Pte Ltd · Singapore</p>
+        <div className="space-y-6">
           <div className="space-y-2">
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Spearheaded a full-stack AI-powered training platform using Next.js, TypeScript, and Tailwind CSS, integrating Google Gemini, Groq SDK, OpenAI Whisper, and ElevenLabs TTS to deliver a conversational AI experience with a real-time digital avatar.
+            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+              AI & Software Engineer
+            </h4>
+            <p className="text-base md:text-lg text-foreground/60">
+              KeyReply Pte Ltd · Singapore
             </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Built and integrated a scalable WebSocket architecture for real-time audio streaming and WebRTC communication, utilising BytePlus Digital Human Interaction Protocol.
+          </div>
+          <div className="space-y-3">
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              Led the build of an AI training platform that blends Google Gemini, Groq, Whisper, and ElevenLabs into a real-time digital avatar experience.
             </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Collaborated regularly with clients to gather feedback, discuss future business developments, and iteratively refine the application, resulting in a 225% improvement in AI response speed.
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              Designed the streaming infrastructure and partnered with clients to iterate quickly, lifting AI response speeds by 225%.
             </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            <img
+              src="/keyreply-photo-1.JPG"
+              alt="keyreply-photo-1"
+              width={500}
+              height={500}
+              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
+            />
+
+            <img
+              src="/keyreply-photo-2.png"
+              alt="keyreply-photo-2"
+              width={500}
+              height={500}
+              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
+            />
           </div>
         </div>
       ),
@@ -67,20 +86,43 @@ export default function Home() {
       title: "2025",
       titleDescription: "Present",
       content: (
-        <div>
-          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
-            Vice President
-          </h4>
-          <p className="text-sm md:text-base text-foreground/60 mb-3">Raffles Hall Developers · Singapore</p>
+  <div className="space-y-6">
           <div className="space-y-2">
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              I host programming workshops and hackathons to help residents learn and apply their skills.
-            </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Software Engineering lead responsible for building, managing, and deploying applications and Telegram bots used by 700+ hall residents.
+            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+              Vice President
+            </h4>
+            <p className="text-base md:text-lg text-foreground/60">
+              Raffles Hall Developers · Singapore
             </p>
           </div>
+          <div className="space-y-3">
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              I organise hands-on workshops and hackathons that keep the Raffles Hall developer community growing.
+            </p>
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              I also lead the engineering squad that ships and maintains the apps and Telegram bots used daily by 700+ residents.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            <img
+              src="/rhdevs-photo-1.jpg"
+              alt="rhdevs-photo-1"
+              width={500}
+              height={500}
+              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
+            />
+            <LinkPreview url="https://new.rhapp.lol">
+              <img
+                src="/rhdevs-photo-2.png"
+                alt="rhdevs-photo-2"
+                width={500}
+                height={500}
+                className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
+              />
+            </LinkPreview>
+          </div>
         </div>
+        
       ),
     },
     {
@@ -88,17 +130,21 @@ export default function Home() {
       title: "2025",
       titleDescription: "Present",
       content: (
-        <div>
-          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
-            Frontend Engineer
-          </h4>
-          <p className="text-sm md:text-base text-foreground/60 mb-3">Freelance Total Rewards Pte Ltd · Singapore</p>
+        <div className="space-y-6">
           <div className="space-y-2">
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Implemented frontend website and FastAPI endpoints connecting backend to frontend.
+            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+              Frontend Engineer
+            </h4>
+            <p className="text-base md:text-lg text-foreground/60">
+              Freelance Total Rewards Pte Ltd · Singapore
             </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Created a dashboard for intuitive data visualisation of running backend scripts.
+          </div>
+          <div className="space-y-3">
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              Build polished React experiences that hook into the FastAPI services powering rewards workflows.
+            </p>
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              Recently shipped a data-rich command centre so stakeholders can monitor automation runs at a glance.
             </p>
           </div>
         </div>
@@ -109,21 +155,33 @@ export default function Home() {
       title: "2024",
       titleDescription: "April - June",
       content: (
-        <div>
-          <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug text-foreground">
-            Software Engineer
-          </h4>
-          <p className="text-sm md:text-base text-foreground/60 mb-3">Foo Well Home Sdn Bhd · Malaysia</p>
+        <div className="space-y-6">
           <div className="space-y-2">
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Developed a scalable property management website using React and Supabase to manage over 1000 client records.
+            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+              Software Engineer
+            </h4>
+            <p className="text-base md:text-lg text-foreground/60">
+              Foo Well Home Sdn Bhd · Malaysia
             </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Implemented secure authentication, including role-based access control (RBAC) for Tenants, Owners, Admins, and a secure login/signup process with email/password authentication using JWT-based session management.
+          </div>
+          <div className="space-y-3">
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              Delivered a property management portal with React and Supabase that keeps thousands of units and records organised.
             </p>
-            <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
-              Built a real-time service management system using Supabase, enabling tenants to submit maintenance requests, owners to track unit status, and admins to update service progress in real time.
+            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+              Added secure RBAC, modern auth, and a real-time service desk so tenants, owners, and admins stay in sync.
             </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            <LinkPreview url="https://www.foowellhome.com">
+              <img
+                src="/foo_well_home-photo-1.png"
+                alt="foo_well_home-photo-1"
+                width={500}
+                height={500}
+                className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
+              />
+            </LinkPreview>
           </div>
         </div>
       ),
