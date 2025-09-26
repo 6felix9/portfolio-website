@@ -193,8 +193,11 @@ export default function Home() {
       <SiteHeader />
 
       {/* Hero: Pixelated image left, Typewriter right */}
-      <section className="relative mx-auto w-full max-w-7xl px-4 md:px-6 pt-24">
-        <div className="grid h-[80vh] grid-cols-1 items-center gap-10 md:grid-cols-2">
+      <section
+        id="hero"
+        className="relative mx-auto flex w-full max-w-7xl min-h-[100svh] items-center justify-center px-4 pb-24 pt-32 md:px-6"
+      >
+        <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-2">
           {/* Left: Pixelated Canvas */}
           <BlurFade delay={0.25} inView className="flex w-full items-center justify-center">
             <PixelatedCanvas
@@ -251,7 +254,7 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <div className="relative w-full overflow-clip">
+      <div id="experience" className="relative w-full overflow-clip">
         <Timeline data={timelineData} />
       </div>
     </>
