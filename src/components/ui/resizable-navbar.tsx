@@ -11,10 +11,7 @@ import {
 
 import React, { useRef, useState } from "react";
 
-
-interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
+type NavbarProps = React.ComponentProps<typeof motion.div>;
 
 interface NavBodyProps {
   children: React.ReactNode;
@@ -56,7 +53,11 @@ interface MobileNavMenuProps {
   id?: string;
 }
 
-export const Navbar = ({ children, className, ...props }: NavbarProps) => {
+export const Navbar = ({
+  children,
+  className,
+  ...props
+}: NavbarProps & { children: React.ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({
     target: ref,
@@ -197,7 +198,7 @@ const MobileNavItems = ({ items, className, onItemClick }: BaseNavItemsProps) =>
           key={item.link}
           href={item.link}
           onClick={() => onItemClick?.()}
-          className="rounded-lg px-3 py-2 transition-colors hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 dark:hover:bg-neutral-800 dark:focus-visible:outline-white"
+          className="rounded-lg px-3 py-2 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 dark:hover:bg-neutral-800 dark:focus-visible:outline-white"
         >
           {item.name}
         </a>
@@ -301,7 +302,7 @@ export const MobileNavToggle = ({
       data-testid="mobile-nav-toggle"
       data-variant={variant}
       className={cn(
-        "inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white/90 text-black shadow-sm transition hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:border-white/15 dark:bg-neutral-900/90 dark:text-white dark:focus-visible:outline-white",
+  "inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white/90 text-black shadow-sm transition hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:border-white/15 dark:bg-neutral-900/90 dark:text-white dark:focus-visible:outline-white",
         className,
       )}
     >
