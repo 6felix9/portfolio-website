@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import Link from "next/link";
 import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 import {
@@ -23,9 +23,13 @@ const navItems = [
 
 export const SiteHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const mobileMenuId = useId();
 
   return (
-    <Navbar className="fixed top-0 left-0 right-0 z-50">
+    <Navbar
+      className="fixed top-0 left-0 right-0 z-50 lg:top-0"
+      data-testid="site-navbar"
+    >
       <NavBody>
         <NavbarLogo />
         <NavItems items={navItems} />
@@ -37,16 +41,35 @@ export const SiteHeader = () => {
           <MobileNavToggle
             isOpen={isOpen}
             onClick={() => setIsOpen((v) => !v)}
+            menuId={mobileMenuId}
+            variant="desktop"
           />
         </div>
       </NavBody>
       <MobileNav visible={isOpen}>
         <MobileNavHeader>
           <NavbarLogo />
-          <MobileNavToggle isOpen={isOpen} onClick={() => setIsOpen(false)} />
+          <div className="flex items-center gap-3">
+            <AnimatedThemeToggler className="text-xl" />
+            <MobileNavToggle
+              isOpen={isOpen}
+              onClick={() => setIsOpen((prev) => !prev)}
+              menuId={mobileMenuId}
+              variant="mobile"
+            />
+          </div>
         </MobileNavHeader>
-        <MobileNavMenu isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <NavItems items={navItems} onItemClick={() => setIsOpen(false)} />
+        <MobileNavMenu
+          id={mobileMenuId}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        >
+          <NavItems
+            items={navItems}
+            variant="mobile"
+            className="text-lg"
+            onItemClick={() => setIsOpen(false)}
+          />
         </MobileNavMenu>
       </MobileNav>
     </Navbar>
