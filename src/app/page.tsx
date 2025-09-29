@@ -217,7 +217,7 @@ export default function Home() {
     },
     {
       institution: "Taylor's College Lakeside Campus",
-      logo: "/taylor-logo.jpeg",
+      logo: "/taylors-logo.png",
       logoAlt: "Taylor's College",
       period: "Aug 2022 – Dec 2023",
       degree: "Cambridge A Levels",
@@ -233,15 +233,17 @@ export default function Home() {
     },
     {
       institution: "Marlborough College Malaysia",
-      logo: "/marlborough-logo.png",
+      logo: "/marlborough-logo.svg",
       logoAlt: "Marlborough College",
       period: "Aug 2019 – June 2022",
-      degree: "IGCSEs",
+      degree: "International General Certificate of Secondary Education (IGCSE)",
       location: "Iskandar Puteri, Malaysia",
       summary:
-        "Computer Science",
+        "Results: 8A* 3A",
       highlights: [
-
+        "British Physics Olympiad",
+        "Chess Club",
+        "Volleyball",
       ],
     },
   ];
@@ -328,7 +330,7 @@ export default function Home() {
       <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-6 md:grid-cols-3">
         {educationHistory.map((education) => (
           <CardContainer key={education.institution} className="inter-var h-full">
-            <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] h-full rounded-xl p-6 border flex flex-col gap-5">
+            <CardBody className="bg-gray-50 relative group/card hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-neutral-800/[0.4] dark:bg-neutral-900/80 dark:border-white/[0.2] border-black/[0.1] h-full rounded-xl p-6 border flex flex-col gap-5">
               <CardItem translateZ="70" className="flex items-start gap-4">
                 {education.logo ? (
                   <img
