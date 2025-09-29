@@ -319,17 +319,18 @@ export default function Home() {
       </div>
 
       {/* Education Section */}
-      <div className="max-w-6xl mx-auto pt-20 text-center md:text-left">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground">
-          Education
-        </h2>
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70">
-          A journey through my academic experiences and milestones.
-        </p>
-      </div>
-      <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-6 md:grid-cols-3">
+      <div id="education" className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10">
+        <div className="max-w-6xl mx-auto pt-12 md:pt-20">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
+            Education
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70">
+            A journey through my academic experiences and milestones.
+          </p>
+        </div>
+        <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-3 md:gap-6 md:grid-cols-3 pb-12 md:pb-20">
         {educationHistory.map((education) => (
-          <CardContainer key={education.institution} className="inter-var h-full">
+          <CardContainer key={education.institution} className="inter-var h-full my-0">
             <CardBody className="bg-gray-50 relative group/card hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-neutral-800/[0.4] dark:bg-neutral-900/80 dark:border-white/[0.2] border-black/[0.1] h-full rounded-xl p-6 border flex flex-col gap-5">
               <CardItem translateZ="70" className="flex items-start gap-4">
                 {education.logo ? (
@@ -384,6 +385,7 @@ export default function Home() {
             </CardBody>
           </CardContainer>
         ))}
+        </div>
       </div>
     </>
   );
