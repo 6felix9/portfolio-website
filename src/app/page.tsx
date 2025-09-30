@@ -319,8 +319,8 @@ export default function Home() {
       </div>
 
       {/* Education Section */}
-      <div id="education" className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10">
-        <div className="max-w-6xl mx-auto pt-12 md:pt-20">
+      <div id="education" className="w-full bg-white dark:bg-neutral-950 font-sans px-4 md:px-10">
+        <div className="max-w-6xl mx-auto pt-16 md:pt-20">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
             Education
           </h2>
