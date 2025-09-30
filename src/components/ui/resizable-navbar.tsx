@@ -330,11 +330,17 @@ export const MobileNavToggle = ({
 };
 
 export const NavbarLogo = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <a
       href="#"
+      onClick={handleClick}
       data-site-logo
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white cursor-pointer"
     >
       <UserRound />
       <span className="font-medium text-black dark:text-white">Tze Foong</span>
