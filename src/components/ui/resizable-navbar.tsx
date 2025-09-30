@@ -153,6 +153,15 @@ export const NavItems = ({
 const DesktopNavItems = ({ items, className, onItemClick }: BaseNavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
+    e.preventDefault();
+    const target = document.querySelector(link);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    onItemClick?.();
+  };
+
   return (
     <motion.div
       onMouseLeave={() => setHovered(null)}
@@ -164,7 +173,7 @@ const DesktopNavItems = ({ items, className, onItemClick }: BaseNavItemsProps) =
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
+          onClick={(e) => handleClick(e, item.link)}
           className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 pointer-events-auto"
           key={`link-${idx}`}
           href={item.link}
@@ -183,6 +192,15 @@ const DesktopNavItems = ({ items, className, onItemClick }: BaseNavItemsProps) =
 };
 
 const MobileNavItems = ({ items, className, onItemClick }: BaseNavItemsProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
+    e.preventDefault();
+    const target = document.querySelector(link);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    onItemClick?.();
+  };
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: -8 }}
@@ -197,7 +215,7 @@ const MobileNavItems = ({ items, className, onItemClick }: BaseNavItemsProps) =>
         <a
           key={item.link}
           href={item.link}
-          onClick={() => onItemClick?.()}
+          onClick={(e) => handleClick(e, item.link)}
           className="rounded-lg px-3 py-2 transition-colors hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 dark:hover:bg-neutral-800 dark:focus-visible:outline-white"
         >
           {item.name}
