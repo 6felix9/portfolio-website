@@ -313,6 +313,98 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About Section */}
+      <section id="about" className="w-full bg-white dark:bg-neutral-950 font-sans px-4 md:px-10">
+        <div className="max-w-6xl mx-auto pt-16 md:pt-20 pb-16 md:pb-20">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
+            About Me
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70 mb-10">
+            Get to know more about who I am and what I do.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            {/* Left Column - About Text */}
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
+                  Who am I?
+                </h3>
+                <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+                  I'm a Full Stack Developer currently pursuing Computer Science at the National University of Singapore. 
+                  I'm passionate about building innovative solutions that blend cutting-edge technology with practical applications.
+                </p>
+                <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+                  My journey in tech has taken me from developing AI-powered training platforms to building property 
+                  management systems, and leading developer communities. I thrive on solving complex problems and 
+                  bringing ideas to life through code.
+                </p>
+                <p className="text-sm md:text-base leading-relaxed text-foreground/80">
+                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
+                  or organizing tech workshops to help others grow their skills.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column - Skills & Tech Stack */}
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
+                  Skills & Technologies
+                </h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-base md:text-lg font-semibold text-foreground/90 mb-2">
+                      Frontend
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {["React", "Next.js", "TypeScript", "Tailwind CSS", "Motion"].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-base md:text-lg font-semibold text-foreground/90 mb-2">
+                      Backend
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {["Node.js", "FastAPI", "Python", "Supabase", "PostgreSQL"].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-base md:text-lg font-semibold text-foreground/90 mb-2">
+                      AI & Tools
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {["Google Gemini", "Groq", "Whisper", "ElevenLabs", "Git"].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Experience Section */}
       <div id="experience" className="relative w-full overflow-clip">
         <Timeline data={timelineData} />
