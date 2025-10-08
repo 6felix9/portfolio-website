@@ -1,0 +1,65 @@
+[
+  {
+    "icon": "/keyreply-logo.jpeg",
+    "title": "2025",
+    "titleDescription": "June - August",
+    "content": {
+      "position": "AI & Software Engineer",
+      "company": "KeyReply Pte Ltd · Singapore",
+      "description": [
+        "Led the build of an AI training platform that blends Google Gemini, Groq, Whisper, and ElevenLabs into a real-time digital avatar experience.",
+        "Designed the streaming infrastructure and partnered with clients to iterate quickly, lifting AI response speeds by 225%."
+      ],
+      "images": [
+        { "src": "/keyreply-photo-1.JPG" },
+        { "src": "/keyreply-photo-2.png" }
+      ]
+    }
+  },
+  {
+    "icon": "/rhdevs-logo.jpeg",
+    "title": "2025",
+    "titleDescription": "Present",
+    "content": {
+      "position": "Vice President",
+      "company": "Raffles Hall Developers · Singapore",
+      "description": [
+        "I organise hands-on workshops and hackathons that keep the Raffles Hall developer community growing.",
+        "I also lead the engineering squad that ships and maintains the apps and Telegram bots used daily by 700+ residents."
+      ],
+      "images": [
+        { "src": "/rhdevs-photo-1.jpg" },
+        { "src": "/rhdevs-photo-2.png", "href": "https://new.rhapp.lol" }
+      ]
+    }
+  },
+  {
+    "icon": "BriefcaseIcon",
+    "title": "2025",
+    "titleDescription": "Present",
+    "content": {
+      "position": "Frontend Engineer",
+      "company": "Freelance Total Rewards Pte Ltd · Singapore",
+      "description": [
+        "Build polished React experiences that hook into the FastAPI services powering rewards workflows.",
+        "Recently shipped a data-rich command centre so stakeholders can monitor automation runs at a glance."
+      ]
+    }
+  },
+  {
+    "icon": "/foo_well_home-logo.jpg",
+    "title": "2024",
+    "titleDescription": "April - June",
+    "content": {
+      "position": "Software Engineer",
+      "company": "Foo Well Home Sdn Bhd · Malaysia",
+      "description": [
+        "Delivered a property management portal with React and Supabase that keeps thousands of units and records organised.",
+        "Added secure RBAC, modern auth, and a real-time service desk so tenants, owners, and admins stay in sync."
+      ],
+      "images": [
+        { "src": "/foo_well_home-photo-1.png", "href": "https://www.foowellhome.com" }
+      ]
+    }
+  }
+]

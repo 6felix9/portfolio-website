@@ -5,9 +5,11 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { FlipWords } from "@/components/ui/flip-words";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Timeline } from "@/components/ui/timeline";
-import { LinkPreview } from "@/components/ui/link-preview";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { BriefcaseIcon, GraduationCap, School } from "lucide-react";
+import { BriefcaseIcon, GraduationCapIcon } from "lucide-react";
+import timelineData from "@/data/experience.json";
+import educationHistory from "@/data/education.json";
+import { ExperienceCard } from "@/components/ui/experience-card";
 
 export default function Home() {
   // =========================
@@ -39,214 +41,16 @@ export default function Home() {
   // =============================
   // EXPERIENCE SECTION VARIABLES
   // =============================
-  const timelineData = [
-    {
-      icon: <img src="/keyreply-logo.jpeg" alt="KeyReply"/>,
-      title: "2025",
-      titleDescription: "June - August",
-      content: (
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              AI & Software Engineer
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              KeyReply Pte Ltd · Singapore
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Led the build of an AI training platform that blends Google Gemini, Groq, Whisper, and ElevenLabs into a real-time digital avatar experience.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Designed the streaming infrastructure and partnered with clients to iterate quickly, lifting AI response speeds by 225%.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            <img
-              src="/keyreply-photo-1.JPG"
-              alt="keyreply-photo-1"
-              width={500}
-              height={500}
-              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-            />
-
-            <img
-              src="/keyreply-photo-2.png"
-              alt="keyreply-photo-2"
-              width={500}
-              height={500}
-              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-            />
-          </div>
-        </div>
+  const mappedTimelineData = timelineData.map((item) => ({
+    ...item,
+    icon:
+      item.icon === "BriefcaseIcon" ? (
+        <BriefcaseIcon />
+      ) : (
+        <img src={item.icon} alt={item.content.company} />
       ),
-    },
-    {
-      icon: <img src="/rhdevs-logo.jpeg" alt="Raffles Hall Developers"/>,
-      title: "2025",
-      titleDescription: "Present",
-      content: (
-  <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              Vice President
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              Raffles Hall Developers · Singapore
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              I organise hands-on workshops and hackathons that keep the Raffles Hall developer community growing.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              I also lead the engineering squad that ships and maintains the apps and Telegram bots used daily by 700+ residents.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            <img
-              src="/rhdevs-photo-1.jpg"
-              alt="rhdevs-photo-1"
-              width={500}
-              height={500}
-              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-            />
-            <LinkPreview url="https://new.rhapp.lol">
-              <img
-                src="/rhdevs-photo-2.png"
-                alt="rhdevs-photo-2"
-                width={500}
-                height={500}
-                className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-              />
-            </LinkPreview>
-          </div>
-        </div>
-        
-      ),
-    },
-    {
-      icon: <BriefcaseIcon />,
-      title: "2025",
-      titleDescription: "Present",
-      content: (
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              Frontend Engineer
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              Freelance Total Rewards Pte Ltd · Singapore
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Build polished React experiences that hook into the FastAPI services powering rewards workflows.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Recently shipped a data-rich command centre so stakeholders can monitor automation runs at a glance.
-            </p>
-          </div>
-        </div>
-      ),
-    },
-    {
-      icon: <img src="/foo_well_home-logo.jpg" alt="Foo Well Home"/>,
-      title: "2024",
-      titleDescription: "April - June",
-      content: (
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              Software Engineer
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              Foo Well Home Sdn Bhd · Malaysia
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Delivered a property management portal with React and Supabase that keeps thousands of units and records organised.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Added secure RBAC, modern auth, and a real-time service desk so tenants, owners, and admins stay in sync.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            <LinkPreview url="https://www.foowellhome.com">
-              <img
-                src="/foo_well_home-photo-1.png"
-                alt="foo_well_home-photo-1"
-                width={500}
-                height={500}
-                className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-              />
-            </LinkPreview>
-          </div>
-        </div>
-      ),
-    },
-  ];
-
-  type EducationEntry = {
-    institution: string;
-    period: string;
-    degree: string;
-    location: string;
-    summary: string;
-    highlights: string[];
-    logo?: string;
-    logoAlt?: string;
-    icon?: React.ReactNode;
-  };
-
-  const educationHistory: EducationEntry[] = [
-    {
-      institution: "National University of Singapore",
-      logo: "/nus-logo.png",
-      logoAlt: "NUS crest",
-      period: "Aug 2024 – Present",
-      degree: "Bachelor of Computing (Computer Science)",
-      location: "Singapore",
-      summary:
-        "Interested in specialisation under Software Engineering and Artificial Intelligence.",
-      highlights: [
-        "Key Courses: Object Oriented Programming, Data Structures & Algorithms, Database Systems, Computer Organisation, Discrete Structures",
-      ],
-    },
-    {
-      institution: "Taylor's College Lakeside Campus",
-      logo: "/taylors-logo.png",
-      logoAlt: "Taylor's College",
-      period: "Aug 2022 – Dec 2023",
-      degree: "Cambridge A Levels",
-      location: "Subang Jaya, Malaysia",
-      summary:
-        "Mathematics, Further Mathematics, Physics, and Computer Science.",
-      highlights: [
-        "ImagineHack 2023",
-        "Coder's Challenge 2023 (Champion)",
-        "Awarded Taylor's Top Achiever 2024",
-        "Awarded Tayor's Excellence Award 2023",
-      ],
-    },
-    {
-      institution: "Marlborough College Malaysia",
-      logo: "/marlborough-logo.svg",
-      logoAlt: "Marlborough College",
-      period: "Aug 2019 – June 2022",
-      degree: "International General Certificate of Secondary Education (IGCSE)",
-      location: "Iskandar Puteri, Malaysia",
-      summary:
-        "Results: 8A* 3A",
-      highlights: [
-        "British Physics Olympiad",
-        "Chess Club",
-        "Volleyball",
-      ],
-    },
-  ];
+    content: <ExperienceCard content={item.content} />,
+  }));
 
   return (
     <>
@@ -315,7 +119,7 @@ export default function Home() {
 
       {/* Experience Section */}
       <div id="experience" className="relative w-full overflow-clip">
-        <Timeline data={timelineData} />
+        <Timeline data={mappedTimelineData} />
       </div>
 
       {/* Education Section */}
@@ -343,7 +147,7 @@ export default function Home() {
                   />
                 ) : (
                   <div className="h-12 w-12 shrink-0 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-900 flex items-center justify-center text-neutral-600 dark:text-neutral-200">
-                    {education.icon}
+                    <GraduationCapIcon className="h-6 w-6" />
                   </div>
                 )}
                 <div className="space-y-1">
