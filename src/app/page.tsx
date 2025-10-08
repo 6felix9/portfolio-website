@@ -10,6 +10,7 @@ import { BriefcaseIcon, GraduationCapIcon } from "lucide-react";
 import timelineData from "@/data/experience.json";
 import educationHistory from "@/data/education.json";
 import { ExperienceCard } from "@/components/ui/experience-card";
+import Image from "next/image";
 
 export default function Home() {
   // =========================
@@ -27,7 +28,10 @@ export default function Home() {
   }, []);
 
   // Switch hero image based on theme
-  const heroSrc = isDark ? "/hero-potrait-1.JPG" : "/hero-potrait-2.JPG";
+  const heroSrc = isDark ? "/hero-potrait-1.webp" : "/hero-potrait-2.webp";
+  const heroPlaceholderSrc = isDark
+    ? "/hero-potrait-1-preview.webp"
+    : "/hero-potrait-2-preview.webp";
 
   // Words for the flip animation in the hero heading
   const heroFlipWords = [
@@ -47,7 +51,14 @@ export default function Home() {
       item.icon === "BriefcaseIcon" ? (
         <BriefcaseIcon />
       ) : (
-        <img src={item.icon} alt={item.content.company} />
+        <Image
+          src={item.icon}
+          alt={item.content.company}
+          width={48}
+          height={48}
+          className="h-12 w-12 rounded-full"
+          style={{ objectFit: "contain" }}
+        />
       ),
     content: <ExperienceCard content={item.content} />,
   }));
@@ -66,6 +77,7 @@ export default function Home() {
           <BlurFade delay={0.25} inView className="flex w-full items-center justify-center">
             <PixelatedCanvas
               src={heroSrc}
+              placeholderSrc={heroPlaceholderSrc}
               width={500}
               height={500}
               cellSize={4}
@@ -138,12 +150,13 @@ export default function Home() {
             <CardBody className="bg-gray-50 relative group/card hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-neutral-800/[0.4] dark:bg-neutral-900/80 dark:border-white/[0.2] border-black/[0.1] h-full rounded-xl p-6 border flex flex-col gap-5">
               <CardItem translateZ="70" className="flex items-start gap-4">
                 {education.logo ? (
-                  <img
+                  <Image
                     src={education.logo}
                     alt={education.logoAlt ?? education.institution}
                     width={48}
                     height={48}
-                    className="h-12 w-12 object-contain"
+                    className="h-12 w-12"
+                    style={{ objectFit: "contain" }}
                   />
                 ) : (
                   <div className="h-12 w-12 shrink-0 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-900 flex items-center justify-center text-neutral-600 dark:text-neutral-200">
