@@ -5,12 +5,12 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { FlipWords } from "@/components/ui/flip-words";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Timeline } from "@/components/ui/timeline";
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { BriefcaseIcon, GraduationCapIcon } from "lucide-react";
 import timelineData from "@/data/experience.json";
 import educationHistory from "@/data/education.json";
 import { ExperienceCard } from "@/components/ui/experience-card";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Home() {
   // =========================
@@ -145,10 +145,17 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-3 md:gap-6 md:grid-cols-3 pb-12 md:pb-20">
-        {educationHistory.map((education) => (
-          <CardContainer key={education.institution} className="inter-var h-full my-0">
-            <CardBody className="bg-gray-50 relative group/card hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-neutral-800/[0.4] dark:bg-neutral-900/80 dark:border-white/[0.2] border-black/[0.1] h-full rounded-xl p-6 border flex flex-col gap-5">
-              <CardItem translateZ="70" className="flex items-start gap-4">
+          {educationHistory.map((education, index) => (
+            <motion.article
+              key={education.institution}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              whileHover={{ y: -6 }}
+              className="group flex h-full flex-col gap-5 rounded-xl border border-black/10 bg-gray-50 p-6 shadow-sm transition-all duration-300 hover:shadow-xl dark:border-white/10 dark:bg-neutral-900/80 dark:hover:shadow-neutral-800/40"
+            >
+              <div className="flex items-start gap-4">
                 {education.logo ? (
                   <Image
                     src={education.logo}
@@ -159,7 +166,7 @@ export default function Home() {
                     style={{ objectFit: "contain" }}
                   />
                 ) : (
-                  <div className="h-12 w-12 shrink-0 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-900 flex items-center justify-center text-neutral-600 dark:text-neutral-200">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-neutral-600 dark:border-white/10 dark:bg-neutral-900 dark:text-neutral-200">
                     <GraduationCapIcon className="h-6 w-6" />
                   </div>
                 )}
@@ -174,34 +181,23 @@ export default function Home() {
                     {education.location}
                   </p>
                 </div>
-              </CardItem>
+              </div>
 
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-sm md:text-base text-neutral-600 dark:text-neutral-300"
-              >
+              <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-300">
                 {education.degree}
-              </CardItem>
+              </p>
 
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-sm md:text-base leading-relaxed text-neutral-600 dark:text-neutral-300"
-              >
+              <p className="text-sm md:text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
                 {education.summary}
-              </CardItem>
+              </p>
 
-              <CardItem translateZ="90" className="mt-auto">
-                <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-300 list-disc pl-5">
-                  {education.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              </CardItem>
-            </CardBody>
-          </CardContainer>
-        ))}
+              <ul className="mt-auto list-disc space-y-2 pl-5 text-sm text-neutral-600 dark:text-neutral-300">
+                {education.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
         </div>
       </div>
     </>
