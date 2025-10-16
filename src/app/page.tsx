@@ -314,13 +314,13 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="w-full bg-white dark:bg-neutral-950 font-sans px-4 md:px-10">
+      <section id="about" className="w-full bg-white dark:bg-neutral-950 font-sans px-4 md:px-10 min-h-[100svh] flex items-center">
         <div className="max-w-6xl mx-auto pt-16 md:pt-20 pb-16 md:pb-20">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
             About Me
           </h2>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70 mb-10">
-            Get to know more about who I am and what I do.
+            Get to know me better - my journey, skills, and passions.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -331,17 +331,16 @@ export default function Home() {
                   Who am I?
                 </h3>
                 <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-                  I'm a Full Stack Developer currently pursuing Computer Science at the National University of Singapore. 
-                  I'm passionate about building innovative solutions that blend cutting-edge technology with practical applications.
+                  I’m a Full Stack Developer and Computer Science student at the National University of Singapore, 
+                  with a particular passion on building practical, AI-driven applications that solve real problems.
                 </p>
                 <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-                  My journey in tech has taken me from developing AI-powered training platforms to building property 
-                  management systems, and leading developer communities. I thrive on solving complex problems and 
-                  bringing ideas to life through code.
+                  My work spans from developing AI-powered training platforms to creating property management systems and leading developer communities. 
+                  I love turning innovative ideas into functional, impactful products.
                 </p>
                 <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
-                  or organizing tech workshops to help others grow their skills.
+                  Outside of coding, you'll probably find me exploring the latest AI research, 
+                  experimenting with new developer tools, unwinding with a game of floorball or listening to Mandopop.
                 </p>
               </div>
             </div>
