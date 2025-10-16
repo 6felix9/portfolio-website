@@ -113,6 +113,17 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
   const pointerInsideRef = React.useRef<boolean>(false);
   const activityRef = React.useRef<number>(0);
   const activityTargetRef = React.useRef<number>(0);
+  const [hasFinePointer, setHasFinePointer] = React.useState(true);
+  const isInteractive = interactive && hasFinePointer;
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const update = () => setHasFinePointer(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
 
   React.useEffect(() => {
     let isCancelled = false;
@@ -315,7 +326,7 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
     };
 
     const ensureInteractivePipeline = () => {
-      if (!interactive) {
+      if (!isInteractive) {
         if (pointerCleanup) {
           pointerCleanup();
           pointerCleanup = null;
@@ -538,7 +549,7 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
       samplesRef.current = samples;
       currentImageRef.current = image;
 
-      if (interactive) {
+      if (isInteractive) {
         drawStatic();
         ensureInteractivePipeline();
       } else {
@@ -649,7 +660,7 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
     grayscale,
     responsive,
     dropoutStrength,
-    interactive,
+    isInteractive,
     distortionStrength,
     distortionRadius,
     distortionMode,
@@ -663,6 +674,8 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
     jitterSpeed,
     fadeOnLeave,
     fadeSpeed,
+    hasFinePointer,
+    interactive,
   ]);
 
 
