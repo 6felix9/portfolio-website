@@ -98,7 +98,7 @@ export default function Home() {
           </BlurFade>
 
           {/* Right: Flip Words */}
-          <div className="flex w-full flex-col items-start justify-center text-left gap-6">
+          <div className="flex w-full flex-col items-start justify-center text-left gap-6 md:pr-12">
             <div className=" items-end gap-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
               Welcome to <br />
               Tze Foong's 
