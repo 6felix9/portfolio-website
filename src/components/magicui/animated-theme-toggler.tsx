@@ -1,87 +1,84 @@
-"use client";
+"use client"
 
-import { Moon, SunDim } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import { flushSync } from "react-dom";
-import { cn } from "@/lib/utils";
+import { useCallback, useEffect, useRef, useState } from "react"
+import { Moon, Sun } from "lucide-react"
+import { flushSync } from "react-dom"
 
-type props = {
-  className?: string;
-};
+import { cn } from "@/lib/utils"
 
-export const AnimatedThemeToggler = ({ className }: props) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const getStoredTheme = () => {
-    if (typeof window === "undefined") return null;
-    try {
-      return window.localStorage.getItem("theme");
-    } catch (error) {
-      return null;
-    }
-  };
-  const persistTheme = (dark: boolean) => {
-    if (typeof window === "undefined") return;
-    try {
-      window.localStorage.setItem("theme", dark ? "dark" : "light");
-    } catch (error) {
-      // Ignore storage failures so unavailable persistence does not break toggling.
-    }
-  };
+interface AnimatedThemeTogglerProps
+  extends React.ComponentPropsWithoutRef<"button"> {
+  duration?: number
+}
+
+export const AnimatedThemeToggler = ({
+  className,
+  duration = 400,
+  ...props
+}: AnimatedThemeTogglerProps) => {
+  const [isDark, setIsDark] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    const storedTheme = getStoredTheme();
-    if (storedTheme === "light" || storedTheme === "dark") {
-      setIsDarkMode(storedTheme === "dark");
-      return;
+    const updateTheme = () => {
+      setIsDark(document.documentElement.classList.contains("dark"))
     }
 
-    const isDocumentDark = document.documentElement.classList.contains("dark");
-    setIsDarkMode(isDocumentDark);
-  }, []);
-  const changeTheme = async () => {
-    if (!buttonRef.current) return;
+    updateTheme()
+
+    const observer = new MutationObserver(updateTheme)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const toggleTheme = useCallback(async () => {
+    if (!buttonRef.current) return
 
     await document.startViewTransition(() => {
       flushSync(() => {
-        const dark = document.documentElement.classList.toggle("dark");
-        setIsDarkMode(dark);
-        persistTheme(dark);
-      });
-    }).ready;
+        const newTheme = !isDark
+        setIsDark(newTheme)
+        document.documentElement.classList.toggle("dark")
+      })
+    }).ready
 
     const { top, left, width, height } =
-      buttonRef.current.getBoundingClientRect();
-    const y = top + height / 2;
-    const x = left + width / 2;
-
-    const right = window.innerWidth - left;
-    const bottom = window.innerHeight - top;
-    const maxRad = Math.hypot(Math.max(left, right), Math.max(top, bottom));
+      buttonRef.current.getBoundingClientRect()
+    const x = left + width / 2
+    const y = top + height / 2
+    const maxRadius = Math.hypot(
+      Math.max(left, window.innerWidth - left),
+      Math.max(top, window.innerHeight - top)
+    )
 
     document.documentElement.animate(
       {
         clipPath: [
           `circle(0px at ${x}px ${y}px)`,
-          `circle(${maxRad}px at ${x}px ${y}px)`,
+          `circle(${maxRadius}px at ${x}px ${y}px)`,
         ],
       },
       {
-        duration: 700,
+        duration,
         easing: "ease-in-out",
         pseudoElement: "::view-transition-new(root)",
-      },
-    );
-  };
+      }
+    )
+  }, [isDark, duration])
+
   return (
     <button
       ref={buttonRef}
-      onClick={changeTheme}
+      onClick={toggleTheme}
       className={cn(className)}
-      aria-label={isDarkMode ? "Switch to light theme" : "Switch to dark theme"}
-      title={isDarkMode ? "Switch to light theme" : "Switch to dark theme"}
+      {...props}
     >
-      {isDarkMode ? <SunDim /> : <Moon />}
+      {isDark ? <Sun /> : <Moon />}
+      <span className="sr-only">Toggle theme</span>
     </button>
-  );
-};
+  )
+}

@@ -5,9 +5,12 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { FlipWords } from "@/components/ui/flip-words";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Timeline } from "@/components/ui/timeline";
-import { LinkPreview } from "@/components/ui/link-preview";
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { BriefcaseIcon, GraduationCap, School } from "lucide-react";
+import { BriefcaseIcon, GraduationCapIcon } from "lucide-react";
+import timelineData from "@/data/experience.json";
+import educationHistory from "@/data/education.json";
+import { ExperienceCard } from "@/components/ui/experience-card";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Home() {
   // =========================
@@ -25,7 +28,10 @@ export default function Home() {
   }, []);
 
   // Switch hero image based on theme
-  const heroSrc = isDark ? "/hero-potrait-1.JPG" : "/hero-potrait-2.JPG";
+  const heroSrc = isDark ? "/hero-potrait-1.webp" : "/hero-potrait-2.webp";
+  const heroPlaceholderSrc = isDark
+    ? "/hero-potrait-1-preview.webp"
+    : "/hero-potrait-2-preview.webp";
 
   // Words for the flip animation in the hero heading
   const heroFlipWords = [
@@ -39,214 +45,23 @@ export default function Home() {
   // =============================
   // EXPERIENCE SECTION VARIABLES
   // =============================
-  const timelineData = [
-    {
-      icon: <img src="/keyreply-logo.jpeg" alt="KeyReply"/>,
-      title: "2025",
-      titleDescription: "June - August",
-      content: (
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              AI & Software Engineer
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              KeyReply Pte Ltd · Singapore
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Led the build of an AI training platform that blends Google Gemini, Groq, Whisper, and ElevenLabs into a real-time digital avatar experience.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Designed the streaming infrastructure and partnered with clients to iterate quickly, lifting AI response speeds by 225%.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            <img
-              src="/keyreply-photo-1.JPG"
-              alt="keyreply-photo-1"
-              width={500}
-              height={500}
-              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-            />
-
-            <img
-              src="/keyreply-photo-2.png"
-              alt="keyreply-photo-2"
-              width={500}
-              height={500}
-              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-            />
-          </div>
-        </div>
+  const mappedTimelineData = timelineData.map((item) => ({
+    ...item,
+    icon:
+      item.icon === "BriefcaseIcon" ? (
+        <BriefcaseIcon />
+      ) : (
+        <Image
+          src={item.icon}
+          alt={item.content.company}
+          width={48}
+          height={48}
+          className="h-12 w-12 rounded-full"
+          style={{ objectFit: "contain" }}
+        />
       ),
-    },
-    {
-      icon: <img src="/rhdevs-logo.jpeg" alt="Raffles Hall Developers"/>,
-      title: "2025",
-      titleDescription: "Present",
-      content: (
-  <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              Vice President
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              Raffles Hall Developers · Singapore
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              I organise hands-on workshops and hackathons that keep the Raffles Hall developer community growing.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              I also lead the engineering squad that ships and maintains the apps and Telegram bots used daily by 700+ residents.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            <img
-              src="/rhdevs-photo-1.jpg"
-              alt="rhdevs-photo-1"
-              width={500}
-              height={500}
-              className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-            />
-            <LinkPreview url="https://new.rhapp.lol">
-              <img
-                src="/rhdevs-photo-2.png"
-                alt="rhdevs-photo-2"
-                width={500}
-                height={500}
-                className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-              />
-            </LinkPreview>
-          </div>
-        </div>
-        
-      ),
-    },
-    {
-      icon: <BriefcaseIcon />,
-      title: "2025",
-      titleDescription: "Present",
-      content: (
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              Frontend Engineer
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              Freelance Total Rewards Pte Ltd · Singapore
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Build polished React experiences that hook into the FastAPI services powering rewards workflows.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Recently shipped a data-rich command centre so stakeholders can monitor automation runs at a glance.
-            </p>
-          </div>
-        </div>
-      ),
-    },
-    {
-      icon: <img src="/foo_well_home-logo.jpg" alt="Foo Well Home"/>,
-      title: "2024",
-      titleDescription: "April - June",
-      content: (
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h4 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-              Software Engineer
-            </h4>
-            <p className="text-base md:text-lg text-foreground/60">
-              Foo Well Home Sdn Bhd · Malaysia
-            </p>
-          </div>
-          <div className="space-y-3">
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Delivered a property management portal with React and Supabase that keeps thousands of units and records organised.
-            </p>
-            <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-              Added secure RBAC, modern auth, and a real-time service desk so tenants, owners, and admins stay in sync.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            <LinkPreview url="https://www.foowellhome.com">
-              <img
-                src="/foo_well_home-photo-1.png"
-                alt="foo_well_home-photo-1"
-                width={500}
-                height={500}
-                className="h-36 md:h-52 lg:h-64 w-full rounded-2xl object-cover shadow-lg"
-              />
-            </LinkPreview>
-          </div>
-        </div>
-      ),
-    },
-  ];
-
-  type EducationEntry = {
-    institution: string;
-    period: string;
-    degree: string;
-    location: string;
-    summary: string;
-    highlights: string[];
-    logo?: string;
-    logoAlt?: string;
-    icon?: React.ReactNode;
-  };
-
-  const educationHistory: EducationEntry[] = [
-    {
-      institution: "National University of Singapore",
-      logo: "/nus-logo.png",
-      logoAlt: "NUS crest",
-      period: "Aug 2024 – Present",
-      degree: "Bachelor of Computing (Computer Science)",
-      location: "Singapore",
-      summary:
-        "Interested in specialisation under Software Engineering and Artificial Intelligence.",
-      highlights: [
-        "Key Courses: Object Oriented Programming, Data Structures & Algorithms, Database Systems, Computer Organisation, Discrete Structures",
-      ],
-    },
-    {
-      institution: "Taylor's College Lakeside Campus",
-      logo: "/taylors-logo.png",
-      logoAlt: "Taylor's College",
-      period: "Aug 2022 – Dec 2023",
-      degree: "Cambridge A Levels",
-      location: "Subang Jaya, Malaysia",
-      summary:
-        "Mathematics, Further Mathematics, Physics, and Computer Science.",
-      highlights: [
-        "ImagineHack 2023",
-        "Coder's Challenge 2023 (Champion)",
-        "Awarded Taylor's Top Achiever 2024",
-        "Awarded Tayor's Excellence Award 2023",
-      ],
-    },
-    {
-      institution: "Marlborough College Malaysia",
-      logo: "/marlborough-logo.svg",
-      logoAlt: "Marlborough College",
-      period: "Aug 2019 – June 2022",
-      degree: "International General Certificate of Secondary Education (IGCSE)",
-      location: "Iskandar Puteri, Malaysia",
-      summary:
-        "Results: 8A* 3A",
-      highlights: [
-        "British Physics Olympiad",
-        "Chess Club",
-        "Volleyball",
-      ],
-    },
-  ];
+    content: <ExperienceCard content={item.content} />,
+  }));
 
   return (
     <>
@@ -262,6 +77,7 @@ export default function Home() {
           <BlurFade delay={0.25} inView className="flex w-full items-center justify-center">
             <PixelatedCanvas
               src={heroSrc}
+              placeholderSrc={heroPlaceholderSrc}
               width={500}
               height={500}
               cellSize={4}
@@ -406,7 +222,7 @@ export default function Home() {
 
       {/* Experience Section */}
       <div id="experience" className="relative w-full overflow-clip">
-        <Timeline data={timelineData} />
+        <Timeline data={mappedTimelineData} />
       </div>
 
       {/* Education Section */}
@@ -420,21 +236,29 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-3 md:gap-6 md:grid-cols-3 pb-12 md:pb-20">
-        {educationHistory.map((education) => (
-          <CardContainer key={education.institution} className="inter-var h-full my-0">
-            <CardBody className="bg-gray-50 relative group/card hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-neutral-800/[0.4] dark:bg-neutral-900/80 dark:border-white/[0.2] border-black/[0.1] h-full rounded-xl p-6 border flex flex-col gap-5">
-              <CardItem translateZ="70" className="flex items-start gap-4">
+          {educationHistory.map((education, index) => (
+            <motion.article
+              key={education.institution}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              whileHover={{ y: -6 }}
+              className="group flex h-full flex-col gap-5 rounded-xl border border-black/10 bg-gray-50 p-6 shadow-sm transition-all duration-300 hover:shadow-xl dark:border-white/10 dark:bg-neutral-900/80 dark:hover:shadow-neutral-800/40"
+            >
+              <div className="flex items-start gap-4">
                 {education.logo ? (
-                  <img
+                  <Image
                     src={education.logo}
                     alt={education.logoAlt ?? education.institution}
                     width={48}
                     height={48}
-                    className="h-12 w-12 object-contain"
+                    className="h-12 w-12"
+                    style={{ objectFit: "contain" }}
                   />
                 ) : (
-                  <div className="h-12 w-12 shrink-0 rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-900 flex items-center justify-center text-neutral-600 dark:text-neutral-200">
-                    {education.icon}
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-neutral-600 dark:border-white/10 dark:bg-neutral-900 dark:text-neutral-200">
+                    <GraduationCapIcon className="h-6 w-6" />
                   </div>
                 )}
                 <div className="space-y-1">
@@ -448,34 +272,23 @@ export default function Home() {
                     {education.location}
                   </p>
                 </div>
-              </CardItem>
+              </div>
 
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-sm md:text-base text-neutral-600 dark:text-neutral-300"
-              >
+              <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-300">
                 {education.degree}
-              </CardItem>
+              </p>
 
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-sm md:text-base leading-relaxed text-neutral-600 dark:text-neutral-300"
-              >
+              <p className="text-sm md:text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
                 {education.summary}
-              </CardItem>
+              </p>
 
-              <CardItem translateZ="90" className="mt-auto">
-                <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-300 list-disc pl-5">
-                  {education.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              </CardItem>
-            </CardBody>
-          </CardContainer>
-        ))}
+              <ul className="mt-auto list-disc space-y-2 pl-5 text-sm text-neutral-600 dark:text-neutral-300">
+                {education.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
         </div>
       </div>
     </>

@@ -1,0 +1,43 @@
+[
+  {
+    "institution": "National University of Singapore",
+    "logo": "/nus-logo.png",
+    "logoAlt": "NUS crest",
+    "period": "Aug 2024 – Present",
+    "degree": "Bachelor of Computing (Computer Science)",
+    "location": "Singapore",
+    "summary": "Interested in specialisation under Software Engineering and Artificial Intelligence.",
+    "highlights": [
+      "Key Courses: Object Oriented Programming, Data Structures & Algorithms, Database Systems, Computer Organisation, Discrete Structures"
+    ]
+  },
+  {
+    "institution": "Taylor's College Lakeside Campus",
+    "logo": "/taylors-logo.png",
+    "logoAlt": "Taylor's College",
+    "period": "Aug 2022 – Dec 2023",
+    "degree": "Cambridge A Levels",
+    "location": "Subang Jaya, Malaysia",
+    "summary": "Mathematics, Further Mathematics, Physics, and Computer Science.",
+    "highlights": [
+      "ImagineHack 2023",
+      "Coder's Challenge 2023 (Champion)",
+      "Awarded Taylor's Top Achiever 2024",
+      "Awarded Tayor's Excellence Award 2023"
+    ]
+  },
+  {
+    "institution": "Marlborough College Malaysia",
+    "logo": "/marlborough-logo.svg",
+    "logoAlt": "Marlborough College",
+    "period": "Aug 2019 – June 2022",
+    "degree": "International General Certificate of Secondary Education (IGCSE)",
+    "location": "Iskandar Puteri, Malaysia",
+    "summary": "Results: 8A* 3A",
+    "highlights": [
+      "British Physics Olympiad",
+      "Chess Club",
+      "Volleyball"
+    ]
+  }
+]

@@ -57,7 +57,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           >
             <div
               data-timeline-meta
-              className="relative flex-2 items-center gap-4 md:gap-0 md:flex-col md:items-start z-40 md:sticky md:top-40 md:self-start md:max-w-sm lg:max-w-full"
+              className="relative flex items-center gap-4 md:flex-2 md:gap-0 md:flex-col md:items-start z-40 md:sticky md:top-40 md:self-start md:max-w-sm lg:max-w-full"
             >
               <div className="relative h-12 w-12 flex-shrink-0 rounded-full bg-white dark:bg-black flex items-center justify-center overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm md:absolute md:left-2">
                 {item.icon}
