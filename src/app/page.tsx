@@ -130,92 +130,118 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="w-full bg-white dark:bg-neutral-950 font-sans px-4 md:px-10 min-h-[100svh] flex items-center">
-        <div className="max-w-6xl mx-auto pt-16 md:pt-20 pb-16 md:pb-20">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
-            About Me
-          </h2>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70 mb-10">
-            Get to know me better - my journey, skills, and passions.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {/* Left Column - About Text */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
-                  Who am I?
-                </h3>
-                <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-                  I’m a Full Stack Developer and Computer Science student at the National University of Singapore, 
-                  with a particular passion on building practical, AI-driven applications that solve real problems.
-                </p>
-                <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-                  My work spans from developing AI-powered training platforms to creating property management systems and leading developer communities. 
-                  I love turning innovative ideas into functional, impactful products.
-                </p>
-                <p className="text-sm md:text-base leading-relaxed text-foreground/80">
-                  Outside of coding, you'll probably find me exploring the latest AI research, 
-                  experimenting with new developer tools, unwinding with a game of floorball or listening to Mandopop.
-                </p>
+      <section id="about" className="relative w-full min-h-[100vh] bg-white dark:bg-neutral-950 flex items-center justify-center px-4 md:px-6">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Left: Portrait Image */}
+            <BlurFade delay={0.25} inView className="flex w-full items-center justify-center">
+              <div className="relative w-full max-w-md aspect-[3/4]">
+                <Image
+                  src="/about-me-potrait.jpg"
+                  alt="Puah Tze Foong portrait"
+                  fill
+                  className="object-cover rounded-2xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
               </div>
-            </div>
+            </BlurFade>
 
-            {/* Right Column - Skills & Tech Stack */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-foreground">
-                  Skills & Technologies
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-base md:text-lg font-semibold text-foreground/90 mb-2">
-                      Frontend
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {["React", "Next.js", "TypeScript", "Tailwind CSS", "Motion"].map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-base md:text-lg font-semibold text-foreground/90 mb-2">
-                      Backend
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {["Node.js", "FastAPI", "Python", "Supabase", "PostgreSQL"].map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-base md:text-lg font-semibold text-foreground/90 mb-2">
-                      AI & Tools
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {["Google Gemini", "Groq", "Whisper", "ElevenLabs", "Git"].map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-3 py-1.5 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+            {/* Right: About Information */}
+            <BlurFade delay={0.35} inView className="flex flex-col justify-evenly h-full py-8 md:py-12">
+              <div className="space-y-6">
+                {/* Title */}
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-foreground">
+                  About Me
+                </h2>
+
+                {/* Description */}
+                {/* <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70">
+                  My motivations, passions, and journey in the world of technology.
+                </p> */}
+
+                {/* Description */}
+                <div className="space-y-4 leading-relaxed">
+                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-foreground/70">
+                    Full Stack Developer passionate about AI technologies and agentic tools. 
+                    Experienced in building end-to-end solutions that leverage artificial intelligence to solve real-world problems. 
+                  </p>
+                  <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-foreground/70">
+                    Always exploring the latest in AI advancements and tools, blending curiosity with code to create meaningful impact. 
+                    When not building, you'll find me on the floorball court or vibe coding to some mandopop.
+                  </p>
                 </div>
               </div>
-            </div>
+
+              {/* Social Icons */}
+              <div className="flex gap-4 mt-8">
+                <a
+                  href="https://www.linkedin.com/in/tzefoongpuah/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors duration-200"
+                  aria-label="LinkedIn"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect width="4" height="12" x="2" y="9" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/6felix9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors duration-200"
+                  aria-label="GitHub"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                  </svg>
+                </a>
+                <a
+                  href="mailto:tzefoong.puah@u.nus.edu"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors duration-200"
+                  aria-label="Email"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </a>
+              </div>
+            </BlurFade>
           </div>
         </div>
       </section>
