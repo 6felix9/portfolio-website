@@ -31,7 +31,7 @@ export const ExperienceCard = ({ content }: ExperienceCardProps) => {
         {content.description.map((desc, index) => (
           <p
             key={index}
-            className="text-sm md:text-base leading-relaxed text-foreground/80"
+            className="text-sm sm:text-base md:text-xl lg:text-2xl text-foreground/80"
           >
             {desc}
           </p>

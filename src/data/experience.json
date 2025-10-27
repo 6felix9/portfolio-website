@@ -24,8 +24,8 @@
       "position": "Vice President",
       "company": "Raffles Hall Developers · Singapore",
       "description": [
-        "I organise hands-on workshops and hackathons that keep the Raffles Hall developer community growing.",
-        "I also lead the engineering squad that ships and maintains the apps and Telegram bots used daily by 700+ residents."
+        "Organise hands-on workshops and hackathons that keep the Raffles Hall developer community growing.",
+        "Lead the engineering team that ships and maintains the apps and Telegram bots used daily by 700+ residents."
       ],
       "images": [
         { "src": "/rhdevs-photo-1.jpg" },
@@ -38,11 +38,14 @@
     "title": "2025",
     "titleDescription": "Present",
     "content": {
-      "position": "Frontend Engineer",
+      "position": "Software Engineer",
       "company": "Freelance Total Rewards Pte Ltd · Singapore",
       "description": [
-        "Build polished React experiences that hook into the FastAPI services powering rewards workflows.",
+        "Build polished React experiences that hook into the FastAPI services powering an LLM pipeline driven HR management system.",
         "Recently shipped a data-rich command centre so stakeholders can monitor automation runs at a glance."
+      ],
+      "images": [
+        { "src": "/freelance_total_rewards-photo-1.png", "href": "https://jade-staging.vercel.app" }
       ]
     }
   },

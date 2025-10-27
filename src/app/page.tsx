@@ -45,7 +45,7 @@ export default function Home() {
   // =============================
   // EXPERIENCE SECTION VARIABLES
   // =============================
-  const mappedTimelineData = timelineData.map((item) => ({
+  const mappedTimelineData = timelineData.map((item, index) => ({
     ...item,
     icon:
       item.icon === "BriefcaseIcon" ? (
@@ -60,7 +60,11 @@ export default function Home() {
           style={{ objectFit: "contain" }}
         />
       ),
-    content: <ExperienceCard content={item.content} />,
+    content: (
+      <BlurFade delay={0.1 + index * 0.1} inView>
+        <ExperienceCard content={item.content} />
+      </BlurFade>
+    ),
   }));
 
   return (
@@ -154,11 +158,6 @@ export default function Home() {
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-foreground">
                   About Me
                 </h2>
-
-                {/* Description */}
-                {/* <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70">
-                  My motivations, passions, and journey in the world of technology.
-                </p> */}
 
                 {/* Description */}
                 <div className="space-y-4 leading-relaxed">
