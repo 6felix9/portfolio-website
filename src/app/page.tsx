@@ -263,15 +263,8 @@ export default function Home() {
         </div>
         <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-3 md:gap-6 md:grid-cols-3 pb-12 md:pb-20">
           {educationHistory.map((education, index) => (
-            <motion.article
-              key={education.institution}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="group flex h-full flex-col gap-5 rounded-xl border border-black/10 bg-gray-50 p-6 shadow-sm transition-all duration-300 hover:shadow-xl dark:border-white/10 dark:bg-neutral-900/80 dark:hover:shadow-neutral-800/40"
-            >
+            <BlurFade key={education.institution} delay={0.1 + index * 0.1} inView>
+              <article className="group relative flex h-full flex-col gap-5 rounded-xl border border-black/10 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-gray-50 p-6 dark:border-white/10 dark:bg-neutral-900/80 dark:hover:shadow-neutral-800/40">
               <div className="flex items-start gap-4">
                 {education.logo ? (
                   <Image
@@ -313,7 +306,8 @@ export default function Home() {
                   <li key={highlight}>{highlight}</li>
                 ))}
               </ul>
-            </motion.article>
+            </article>
+            </BlurFade>
           ))}
         </div>
       </div>
