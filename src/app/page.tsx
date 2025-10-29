@@ -337,7 +337,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" className="relative w-full min-h-[100vh] bg-white dark:bg-neutral-950 flex flex-col items-center justify-center px-4 md:px-6">
-        <div className="max-w-6xl mx-auto pt-16 md:pt-20 w-full">
+        <div className="max-w-6xl mx-auto pt-12 md:pt-16 w-full">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
             Contact Me
           </h2>
@@ -345,10 +345,10 @@ export default function Home() {
             Let's connect and create something amazing together.
           </p>
         </div>
-        <div className="mx-auto w-full max-w-6xl py-16 md:py-20">
+        <div className="mx-auto w-full max-w-6xl py-8 md:py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 items-start">
             {/* Left: Contact Information (1/3) */}
-            <BlurFade delay={0.25} inView className="flex flex-col justify-center space-y-8">
+            <BlurFade delay={0.25} inView className="flex flex-col justify-center space-y-6">
               <div className="space-y-6">
                 {/* Email */}
                 <a
@@ -441,15 +441,22 @@ export default function Home() {
 
             {/* Right: Contact Form (2/3) */}
             <BlurFade delay={0.35} inView className="md:col-span-2">
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name Input */}
                 <div className="relative">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                  >
+                    Name
+                  </label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    placeholder="Your Name"
+                    placeholder="John Doe"
                     required
                     className="w-full bg-transparent border-0 border-b-2 border-neutral-300 dark:border-neutral-700 px-0 py-3 text-base sm:text-lg text-foreground placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none hover:border-neutral-600 dark:hover:border-neutral-400 focus:border-neutral-600 dark:focus:border-neutral-400 transition-colors duration-300"
                   />
@@ -457,12 +464,19 @@ export default function Home() {
 
                 {/* Email Input */}
                 <div className="relative">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                  >
+                    Email
+                  </label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Your Email"
+                    placeholder="example@gmail.com"
                     required
                     className="w-full bg-transparent border-0 border-b-2 border-neutral-300 dark:border-neutral-700 px-0 py-3 text-base sm:text-lg text-foreground placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none hover:border-neutral-600 dark:hover:border-neutral-400 focus:border-neutral-600 dark:focus:border-neutral-400 transition-colors duration-300"
                   />
@@ -470,11 +484,18 @@ export default function Home() {
 
                 {/* Message Textarea */}
                 <div className="relative">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                  >
+                    Message
+                  </label>
                   <textarea
+                    id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Your Message"
+                    placeholder="Tell me about your project or idea..."
                     required
                     rows={6}
                     className="w-full bg-transparent border-0 border-b-2 border-neutral-300 dark:border-neutral-700 px-0 py-3 text-base sm:text-lg text-foreground placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none hover:border-neutral-600 dark:hover:border-neutral-400 focus:border-neutral-600 dark:focus:border-neutral-400 transition-colors duration-300 resize-none"
