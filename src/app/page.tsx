@@ -5,7 +5,7 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { FlipWords } from "@/components/ui/flip-words";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Timeline } from "@/components/ui/timeline";
-import { BriefcaseIcon, GraduationCapIcon, Mail, Send, MapPin } from "lucide-react";
+import { BriefcaseIcon, GraduationCapIcon, Mail, Send, MapPin, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import timelineData from "@/data/experience.json";
 import educationHistory from "@/data/education.json";
 import { ExperienceCard } from "@/components/ui/experience-card";
@@ -76,12 +76,51 @@ export default function Home() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitStatus, setSubmitStatus] = React.useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Placeholder: Add email sending logic here
-    alert("Thank you for your message! (This is a placeholder)");
-    setFormData({ name: "", email: "", message: "" });
+
+    // Reset status and set loading state
+    setSubmitStatus({ type: null, message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you for your message! I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus({
+        type: "error",
+        message: "An error occurred. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (
@@ -502,12 +541,41 @@ export default function Home() {
                   />
                 </div>
 
+                {/* Status Message */}
+                {submitStatus.type && (
+                  <div
+                    className={`flex items-center gap-2 p-4 rounded-lg ${
+                      submitStatus.type === "success"
+                        ? "bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800"
+                        : "bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-800"
+                    }`}
+                  >
+                    {submitStatus.type === "success" ? (
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    ) : (
+                      <XCircle className="w-5 h-5 flex-shrink-0" />
+                    )}
+                    <p className="text-sm font-medium">{submitStatus.message}</p>
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="shadow-[0_0_0_3px_#000000_inset] px-8 py-3 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 w-full sm:w-auto"
+                  disabled={isSubmitting}
+                  className="shadow-[0_0_0_3px_#000000_inset] px-8 py-3 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2"
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </BlurFade>
