@@ -5,7 +5,7 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { FlipWords } from "@/components/ui/flip-words";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Timeline } from "@/components/ui/timeline";
-import { BriefcaseIcon, GraduationCapIcon } from "lucide-react";
+import { BriefcaseIcon, GraduationCapIcon, Mail, Send, MapPin, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import timelineData from "@/data/experience.json";
 import educationHistory from "@/data/education.json";
 import { ExperienceCard } from "@/components/ui/experience-card";
@@ -66,6 +66,69 @@ export default function Home() {
       </BlurFade>
     ),
   }));
+
+  // ============================
+  // CONTACT SECTION VARIABLES
+  // ============================
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitStatus, setSubmitStatus] = React.useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Reset status and set loading state
+    setSubmitStatus({ type: null, message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you for your message! I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus({
+        type: "error",
+        message: "An error occurred. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <>
@@ -251,8 +314,8 @@ export default function Home() {
       </div>
 
       {/* Education Section */}
-      <div id="education" className="w-full bg-white dark:bg-neutral-950 font-sans px-4 md:px-10">
-        <div className="max-w-6xl mx-auto pt-16 md:pt-20">
+      <div id="education" className="w-full min-h-[100vh] bg-white dark:bg-neutral-950 font-sans px-4 md:px-10 flex flex-col items-center justify-center">
+        <div className="max-w-6xl mx-auto pt-16 md:pt-20 w-full">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
             Education
           </h2>
@@ -263,7 +326,7 @@ export default function Home() {
         <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-3 md:gap-6 md:grid-cols-3 pb-12 md:pb-20">
           {educationHistory.map((education, index) => (
             <BlurFade key={education.institution} delay={0.1 + index * 0.1} inView>
-              <article className="group relative flex h-full flex-col gap-5 rounded-xl border border-black/10 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-gray-50 p-6 dark:border-white/10 dark:bg-neutral-900/80 dark:hover:shadow-neutral-800/40">
+              <article className="group relative flex h-full flex-col gap-5 rounded-xl border border-black/10 shadow-sm transition-all hover:duration-300 hover:shadow-xl hover:-translate-y-1 bg-gray-50 p-6 dark:border-white/10 dark:bg-neutral-900/80 dark:hover:shadow-neutral-800/40">
               <div className="flex items-start gap-4">
                 {education.logo ? (
                   <Image
@@ -310,6 +373,215 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Contact Section */}
+      <section id="contact" className="relative w-full min-h-[100vh] bg-white dark:bg-neutral-950 flex flex-col items-center justify-center px-4 md:px-6">
+        <div className="max-w-6xl mx-auto pt-12 md:pt-16 w-full">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
+            Contact Me
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70">
+            Let's connect and create something amazing together.
+          </p>
+        </div>
+        <div className="mx-auto w-full max-w-6xl py-8 md:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 items-start">
+            {/* Left: Contact Information (1/3) */}
+            <BlurFade delay={0.25} inView className="flex flex-col justify-center space-y-6">
+              <div className="space-y-6">
+                {/* Email */}
+                <a
+                  href="mailto:tzefoong.puah@u.nus.edu"
+                  className="flex items-center gap-4 group transition-all duration-300 hover:translate-x-1"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 transition-colors duration-200">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                      Email
+                    </p>
+                    <p className="text-sm sm:text-base text-foreground/80 group-hover:text-foreground transition-colors">
+                      tzefoong.puah@u.nus.edu
+                    </p>
+                  </div>
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/in/tzefoongpuah/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 group transition-all duration-300 hover:translate-x-1"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 transition-colors duration-200">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect width="4" height="12" x="2" y="9" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                      LinkedIn
+                    </p>
+                    <p className="text-sm sm:text-base text-foreground/80 group-hover:text-foreground transition-colors">
+                      Tze Foong Puah
+                    </p>
+                  </div>
+                </a>
+
+                {/* Telegram */}
+                <a
+                  href="https://t.me/tzefoong"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 group transition-all duration-300 hover:translate-x-1"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 transition-colors duration-200">
+                    <Send className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                      Telegram
+                    </p>
+                    <p className="text-sm sm:text-base text-foreground/80 group-hover:text-foreground transition-colors">
+                      @tzefoong
+                    </p>
+                  </div>
+                </a>
+
+                {/* Location */}
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 transition-colors duration-200">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                      Location
+                    </p>
+                    <p className="text-sm sm:text-base text-foreground/80">
+                      Singapore
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </BlurFade>
+
+            {/* Right: Contact Form (2/3) */}
+            <BlurFade delay={0.35} inView className="md:col-span-2">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name Input */}
+                <div className="relative">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="John Doe"
+                    required
+                    className="w-full bg-transparent border-0 border-b-2 border-neutral-300 dark:border-neutral-700 px-0 py-3 text-base sm:text-lg text-foreground placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none hover:border-neutral-600 dark:hover:border-neutral-400 focus:border-neutral-600 dark:focus:border-neutral-400 transition-colors duration-300"
+                  />
+                </div>
+
+                {/* Email Input */}
+                <div className="relative">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="example@gmail.com"
+                    required
+                    className="w-full bg-transparent border-0 border-b-2 border-neutral-300 dark:border-neutral-700 px-0 py-3 text-base sm:text-lg text-foreground placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none hover:border-neutral-600 dark:hover:border-neutral-400 focus:border-neutral-600 dark:focus:border-neutral-400 transition-colors duration-300"
+                  />
+                </div>
+
+                {/* Message Textarea */}
+                <div className="relative">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Tell me about your project or idea..."
+                    required
+                    rows={6}
+                    className="w-full bg-transparent border-0 border-b-2 border-neutral-300 dark:border-neutral-700 px-0 py-3 text-base sm:text-lg text-foreground placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none hover:border-neutral-600 dark:hover:border-neutral-400 focus:border-neutral-600 dark:focus:border-neutral-400 transition-colors duration-300 resize-none"
+                  />
+                </div>
+
+                {/* Status Message */}
+                {submitStatus.type && (
+                  <div
+                    className={`flex items-center gap-2 p-4 rounded-lg ${
+                      submitStatus.type === "success"
+                        ? "bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800"
+                        : "bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-800"
+                    }`}
+                  >
+                    {submitStatus.type === "success" ? (
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    ) : (
+                      <XCircle className="w-5 h-5 flex-shrink-0" />
+                    )}
+                    <p className="text-sm font-medium">{submitStatus.message}</p>
+                  </div>
+                )}
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="shadow-[0_0_0_3px_#000000_inset] px-8 py-3 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Message
+                    </>
+                  )}
+                </button>
+              </form>
+            </BlurFade>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
