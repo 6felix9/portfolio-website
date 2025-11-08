@@ -27,6 +27,25 @@ export default function Home() {
     return () => obs.disconnect();
   }, []);
 
+  // Track canvas dimensions for responsive behavior
+  const [canvasDimensions, setCanvasDimensions] = React.useState({ width: 500, height: 500 });
+  React.useEffect(() => {
+    const updateDimensions = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        const size = Math.min(width, 500);
+        setCanvasDimensions({ width: size, height: size });
+      } else {
+        // Desktop: fixed 500x500
+        setCanvasDimensions({ width: 500, height: 500 });
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
   // Switch hero image based on theme
   const heroSrc = isDark ? "/hero-potrait-1.webp" : "/hero-potrait-2.webp";
   const heroPlaceholderSrc = isDark
@@ -145,7 +164,7 @@ export default function Home() {
             <PixelatedCanvas
               src={heroSrc}
               placeholderSrc={heroPlaceholderSrc}
-              width={500}
+              width={canvasDimensions.width}
               height={500}
               cellSize={4}
               dotScale={0.9}
@@ -160,7 +179,8 @@ export default function Home() {
               jitterStrength={4}
               jitterSpeed={1}
               sampleAverage
-              className="w-full max-w-[560px] rounded-xl shadow-lg"
+              responsive
+              className="w-full max-w-[560px] md:rounded-xl shadow-lg"
             />
           </BlurFade>
 
