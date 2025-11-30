@@ -8,9 +8,13 @@ import { Timeline } from "@/components/ui/timeline";
 import { BriefcaseIcon, GraduationCapIcon, Mail, Send, MapPin, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import timelineData from "@/data/experience.json";
 import educationHistory from "@/data/education.json";
+import projectsData from "@/data/projects.json";
 import { ExperienceCard } from "@/components/ui/experience-card";
+import { techIconClassName, techIcons } from "@/components/ui/tech-icons";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function Home() {
   // =========================
@@ -85,6 +89,12 @@ export default function Home() {
       </BlurFade>
     ),
   }));
+
+  // ============================
+  // PROJECTS SECTION VARIABLES
+  // ============================
+  const [showAll, setShowAll] = React.useState(false);
+  const MOBILE_PROJECT_LIMIT = 3;
 
   // ============================
   // CONTACT SECTION VARIABLES
@@ -393,6 +403,114 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Projects Section */}
+      <section id="projects" className="w-full min-h-[100vh] bg-white dark:bg-neutral-950 font-sans px-4 md:px-10 flex flex-col items-center justify-center">
+        <div className="max-w-6xl mx-auto pt-16 md:pt-20 w-full">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-foreground max-w-4xl">
+            Projects
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/70">
+            A selection of projects I've built and contributed to.
+          </p>
+        </div>
+        <div className="mt-10 grid w-full max-w-6xl mx-auto grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 pb-12 md:pb-20">
+          {projectsData.map((project, index) => (
+            <BlurFade
+              key={project.title}
+              delay={0.1 + index * 0.1}
+              inView
+              className={cn(
+                index >= MOBILE_PROJECT_LIMIT && !showAll ? "hidden md:block" : ""
+              )}
+            >
+              <article className="group relative flex h-full flex-col rounded-xl border border-black/10 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 bg-gray-50 dark:border-white/10 dark:bg-neutral-900/80 overflow-hidden">
+                <div className="relative aspect-video w-full">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                
+                <div className="flex flex-1 flex-col gap-3 p-5">
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-foreground/70">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-auto flex flex-wrap gap-3 items-center">
+                    {project.tags.map((tag) => {
+                      const Icon = techIcons[tag];
+
+                      return (
+                        <Tooltip key={tag} delayDuration={100}>
+                          <TooltipTrigger asChild>
+                            <span className="cursor-default inline-flex items-center justify-center">
+                              {Icon ? (
+                                <Icon className={techIconClassName} />
+                              ) : (
+                                <span className="text-xs font-medium px-2 py-1 rounded-full bg-neutral-200 dark:bg-neutral-700 text-foreground/80">
+                                  {tag}
+                                </span>
+                              )}
+                            </span>
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="top"
+                            sideOffset={8}
+                            className="z-[9999] bg-neutral-900 dark:bg-neutral-100 text-neutral-50 dark:text-neutral-900 border-neutral-700 dark:border-neutral-300"
+                          >
+                            {tag}
+                          </TooltipContent>
+                        </Tooltip>
+                      );
+                    })}
+                  </div>
+
+                  <div className="flex gap-3 pt-3">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium underline underline-offset-4 hover:text-primary"
+                      >
+                        Link
+                      </a>
+                    )}
+                    {project.repoUrl && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium underline underline-offset-4 hover:text-primary"
+                      >
+                        GitHub
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            </BlurFade>
+          ))}
+        </div>
+
+        {/* View More Projects Button */}
+        {projectsData.length > MOBILE_PROJECT_LIMIT && !showAll && (
+          <div className="w-full flex justify-center pb-20 -mt-5 md:hidden">
+            <button
+              onClick={() => setShowAll(true)}
+              className="px-6 py-2 rounded-full border border-neutral-200 bg-white text-sm font-medium text-neutral-900 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-900 transition-colors shadow-sm"
+            >
+              View More Projects
+            </button>
+          </div>
+        )}
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="relative w-full min-h-[100vh] bg-white dark:bg-neutral-950 flex flex-col items-center justify-center px-4 md:px-6">

@@ -1,0 +1,58 @@
+[
+  {
+    "title": "VibePlan",
+    "description": "An AI-powered itinerary planner for Singapore that scrapes live social media data to recommend activities based on vibe, budget, and real-time trends.",
+    "image": "/vibeplan-photo-1.png",
+    "tags": ["Next.js", "TypeScript", "Supabase", "OpenAI", "ChromaDB"],
+    "liveUrl": "https://vibeplan-app.vercel.app/",
+    "repoUrl": "https://github.com/cursor-hackathon-19ju/vibeplan"
+  },
+  {
+    "title": "MoneyGo",
+    "description": "A cross-platform personal finance mobile app featuring AI receipt scanning, expense tracking, and data visualization.",
+    "image": "/moneygo-photo-1.png",
+    "tags": ["React Native", "Expo", "Supabase", "Gemini AI"],
+    "liveUrl": "https://example.com",
+    "repoUrl": "https://github.com/6felix9/moneygo"
+  },  
+  {
+    "title": "NotiflyMeBot",
+    "description": "A Telegram reminder bot that uses Gemini AI & Duckling to parse natural language dates (e.g., 'tomorrow at 3pm') and schedules automated alerts.",
+    "image": "/notiflyme-photo-1.png",
+    "tags": ["Python", "MongoDB", "Gemini AI", "Telegram API"],
+    "liveUrl": "",
+    "repoUrl": "https://github.com/6felix9/notiflyme-bot"
+  },
+  {
+    "title": "NUS GPA Calculator",
+    "description": "A rich academic tracking tool for NUS students to compute CAP/GPA, featuring CSV import/export, semester filtering, and local storage persistence.",
+    "image": "/nus-cap-calculator-photo-1.png",
+    "tags": ["React", "Vite", "TypeScript", "Tailwind CSS"],
+    "liveUrl": "https://nus-cap-calculator.vercel.app/",
+    "repoUrl": ""
+  },
+  {
+    "title": "Tze Foong's Timer",
+    "description": "A URL-based timer and stopwatch application allowing instant configuration via URL paths with a clean, responsive Tailwind UI.",
+    "image": "/tzefoong-timer-photo-1.png",
+    "tags": ["React", "Vite", "Tailwind CSS"],
+    "liveUrl": "https://tzefoongtimer.pages.dev",
+    "repoUrl": "https://github.com/6felix9/tzefoong-timer"
+  },
+  {
+    "title": "Heartfelt Support Bot",
+    "description": "An anonymous Telegram bot connecting users with support members while maintaining complete privacy for both parties via masked identities.",
+    "image": "/heartfelt-bot-photo-1.png",
+    "tags": ["Python", "MongoDB", "Telegram API"],
+    "liveUrl": "https://t.me/hearhtfelt_companion_bot",
+    "repoUrl": ""
+  },
+  {
+    "title": "Raffles Hall Confessions Bot",
+    "description": "A Telegram bot facilitating anonymous confessions posted to a channel with public comment threads, managing user anonymity.",
+    "image": "/rh-confession-photo-1.jpg",
+    "tags": ["Python", "Telegram API"],
+    "liveUrl": "https://t.me/rh_confession_bot",
+    "repoUrl": ""
+  }
+]
