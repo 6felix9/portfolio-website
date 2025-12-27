@@ -19,6 +19,7 @@ import {
   SiReactrouter,
   SiTailwindcss,
   SiTelegram,
+  SiDocker,
 } from "react-icons/si";
 import { LuDatabase, LuBot } from "react-icons/lu";
 
@@ -45,4 +46,5 @@ export const techIcons: Record<string, IconType> = {
   "React Router": SiReactrouter,
   "Tailwind CSS": SiTailwindcss,
   "Telegram API": SiTelegram,
+  Docker: SiDocker,
 };

@@ -12,9 +12,16 @@
     "description": "A cross-platform personal finance mobile app featuring AI receipt scanning, expense tracking, and data visualization.",
     "image": "/moneygo-photo-1.png",
     "tags": ["React Native", "Expo", "Supabase", "Gemini AI"],
-    "liveUrl": "https://example.com",
     "repoUrl": "https://github.com/6felix9/moneygo"
   },  
+  {
+    "title": "Telegram GPT",
+    "description": "A high-performance Telegram Bot that understands your conversations using persistent PostgreSQL-backed memory and sophisticated token-window optimization.",
+    "image": "/telegram-gpt-logo.jpg",
+    "tags": ["Python", "PostgreSQL", "OpenAI", "Docker", "Telegram API"],
+    "liveUrl": "https://t.me/tzefoong_gpt_bot",
+    "repoUrl": ""
+  },
   {
     "title": "NotiflyMeBot",
     "description": "A Telegram reminder bot that uses Gemini AI & Duckling to parse natural language dates (e.g., 'tomorrow at 3pm') and schedules automated alerts.",
