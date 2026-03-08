@@ -1,5 +1,24 @@
 [
   {
+    "icon": "/nus-logo.png",
+    "title": "2026",
+    "titleDescription": "Present",
+    "content": {
+      "position": "Research Assistant",
+      "company": "National University of Singapore · Part-time",
+      "description": [
+        "Developing CocoLyricist, an AI-powered music and songwriting system for stroke rehabilitation, under Prof. Wang Ye at the School of Computing.",
+        "Building end-to-end ML pipelines with PyTorch and FastAPI, integrated into a Next.js web platform deployed on Vercel."
+      ],
+      "images": [
+        {
+          "src": "/cocolyricist-photo-1.png",
+          "href": "https://cocolyricist.vercel.app"
+        }
+      ]
+    }
+  },
+  {
     "icon": "/keyreply-logo.jpeg",
     "title": "2025",
     "titleDescription": "June - August",
@@ -11,8 +30,12 @@
         "Designed the streaming infrastructure and partnered with clients to iterate quickly, lifting AI response speeds by 225%."
       ],
       "images": [
-        { "src": "/keyreply-photo-1.JPG" },
-        { "src": "/keyreply-photo-2.png" }
+        {
+          "src": "/keyreply-photo-1.JPG"
+        },
+        {
+          "src": "/keyreply-photo-2.png"
+        }
       ]
     }
   },
@@ -28,8 +51,13 @@
         "Lead the engineering team that ships and maintains the apps and Telegram bots used daily by 700+ residents."
       ],
       "images": [
-        { "src": "/rhdevs-photo-1.jpg" },
-        { "src": "/rhdevs-photo-2.png", "href": "https://new.rhapp.lol" }
+        {
+          "src": "/rhdevs-photo-1.jpg"
+        },
+        {
+          "src": "/rhdevs-photo-2.png",
+          "href": "https://new.rhapp.lol"
+        }
       ]
     }
   },
@@ -45,7 +73,10 @@
         "Recently shipped a data-rich command centre so stakeholders can monitor automation runs at a glance."
       ],
       "images": [
-        { "src": "/freelance_total_rewards-photo-1.png", "href": "https://jade-staging.vercel.app" }
+        {
+          "src": "/freelance_total_rewards-photo-1.png",
+          "href": "https://jade-staging.vercel.app"
+        }
       ]
     }
   },
@@ -61,7 +92,10 @@
         "Added secure RBAC, modern auth, and a real-time service desk so tenants, owners, and admins stay in sync."
       ],
       "images": [
-        { "src": "/foo_well_home-photo-1.png", "href": "https://www.foowellhome.com" }
+        {
+          "src": "/foo_well_home-photo-1.png",
+          "href": "https://www.foowellhome.com"
+        }
       ]
     }
   }
