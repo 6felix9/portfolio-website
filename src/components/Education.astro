@@ -1,0 +1,64 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+import education from "../data/education.json";
+import { asset } from "../lib/images";
+
+interface Props {
+  index: string;
+}
+
+const { index } = Astro.props;
+---
+
+<section id="education" class="section">
+  <div class="container-page">
+    <SectionHeading index={index} title={education.heading} subtitle={education.subtitle} />
+
+    {/* Each card spans four shared rows (header / degree / summary / highlights)
+        via subgrid, so the rows — and the divider line — line up across cards. */}
+    <ul class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+      {
+        education.items.map((item, i) => (
+          <li class="row-span-4 grid grid-rows-subgrid gap-y-5" data-reveal style={`--i: ${i}`}>
+            <article class="card row-span-4 grid grid-rows-subgrid gap-y-5 p-6">
+              <div class="flex items-start gap-4">
+                {item.logo ? (
+                  <Image
+                    src={asset(item.logo)}
+                    alt={item.logoAlt ?? item.institution}
+                    width={96}
+                    height={96}
+                    class="h-12 w-12 shrink-0 object-contain"
+                  />
+                ) : (
+                  <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-line bg-raised text-muted">
+                    <Icon name="graduation-cap" size={22} />
+                  </span>
+                )}
+                <div class="space-y-1">
+                  <p class="eyebrow">{item.period}</p>
+                  <h3 class="text-lg font-semibold leading-snug sm:text-xl">{item.institution}</h3>
+                  <p class="text-sm text-faint">{item.location}</p>
+                </div>
+              </div>
+
+              <p class="text-sm font-medium text-fg/85 md:text-base">{item.degree}</p>
+              <p class="text-sm leading-relaxed text-muted md:text-base">{item.summary}</p>
+
+              <ul class="space-y-2 border-t border-line pt-5 text-sm text-muted">
+                {item.highlights.map((highlight) => (
+                  <li class="flex gap-3">
+                    <span class="mt-[0.55em] h-1 w-1 shrink-0 bg-faint" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

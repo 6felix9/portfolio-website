@@ -1,0 +1,16 @@
+---
+import Icon from "./Icon.astro";
+import site from "../data/site.json";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line">
+  <div class="container-page flex items-center justify-between gap-4 py-6 text-sm text-faint">
+    <p>© {year} {site.footer.copyright}</p>
+    <a href="#top" class="link">
+      {site.footer.backToTop}
+      <Icon name="arrow-up" size={14} />
+    </a>
+  </div>
+</footer>

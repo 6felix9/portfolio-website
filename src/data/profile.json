@@ -1,0 +1,34 @@
+{
+  "name": "Puah Tze Foong",
+  "role": "Full Stack Developer",
+  "hero": {
+    "greeting": "Welcome to",
+    "lead": "Tze Foong's",
+    "flipWords": [
+      "Portfolio.",
+      "Playground.",
+      "Showcase.",
+      "Creations.",
+      "Adventures."
+    ],
+    "portrait": {
+      "src": "hero/hero-portrait.jpg",
+      "alt": "Tze Foong at Marina Bay, Singapore, at night"
+    },
+    "buttons": [
+      { "label": "View Projects", "href": "#projects", "style": "primary" },
+      { "label": "Contact Me", "href": "#contact", "style": "secondary" }
+    ]
+  },
+  "about": {
+    "heading": "About Me",
+    "paragraphs": [
+      "Full Stack Developer passionate about AI technologies and agentic tools. Experienced in building end-to-end solutions that leverage artificial intelligence to solve real-world problems.",
+      "Always exploring the latest in AI advancements and tools, blending curiosity with code to create meaningful impact. When not building, you'll find me on the floorball court or vibe coding to some mandopop."
+    ],
+    "portrait": {
+      "src": "about/about-portrait.jpg",
+      "alt": "Puah Tze Foong portrait"
+    }
+  }
+}

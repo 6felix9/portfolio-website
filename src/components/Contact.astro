@@ -1,0 +1,91 @@
+---
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+import contact from "../data/contact.json";
+
+interface Props {
+  index: string;
+}
+
+const { index } = Astro.props;
+const { location } = contact;
+---
+
+<section id="contact" class="section">
+  <div class="container-page">
+    <SectionHeading index={index} title={contact.heading} subtitle={contact.subtitle} />
+
+    <p class="-mt-4 mb-10 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted md:-mt-6 md:mb-12" data-reveal style="--i: 3">
+      <Icon name="map-pin" size={16} class="text-faint" />
+      <span>{location.label}</span>
+      {
+        location.showLocalTime && (
+          <span class="font-mono text-xs text-faint" data-local-time={location.timezone} hidden>
+            <span class="pulse" aria-hidden="true" />
+            <span data-local-time-value />
+          </span>
+        )
+      }
+    </p>
+
+    <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
+      {
+        contact.links.map((link, i) => {
+          const external = link.href.startsWith("http");
+          return (
+            <li data-reveal style={`--i: ${i}`}>
+              <a
+                href={link.href}
+                class="card contact-card group flex h-full flex-col justify-between gap-10 p-5"
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+              >
+                <span class="flex items-start justify-between">
+                  <span class="grid h-11 w-11 place-items-center rounded-full border border-line bg-raised text-muted transition-colors duration-200 group-hover:text-fg">
+                    <Icon name={link.icon} size={19} />
+                  </span>
+                  <Icon name="arrow-up-right" size={18} class="arrow text-faint" />
+                </span>
+                <span class="block min-w-0">
+                  <span class="eyebrow block">{link.label}</span>
+                  <span class="mt-1.5 block truncate text-[0.9375rem] font-medium text-fg/90">{link.value}</span>
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .contact-card :global(.arrow) {
+    transition:
+      transform var(--dur) var(--ease),
+      color var(--dur-fast) var(--ease);
+  }
+  .contact-card:hover :global(.arrow) {
+    transform: translate(3px, -3px);
+    color: var(--color-fg);
+  }
+
+  .pulse {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.5rem;
+    background-color: var(--color-fg);
+    vertical-align: 1px;
+    animation: pulse 2.4s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+</style>

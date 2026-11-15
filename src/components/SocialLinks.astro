@@ -1,0 +1,27 @@
+---
+import Icon from "./Icon.astro";
+import contact from "../data/contact.json";
+
+const links = contact.links.filter((link) => link.showInHero);
+---
+
+<ul class="flex gap-3">
+  {
+    links.map((link) => {
+      const external = link.href.startsWith("http");
+      return (
+        <li>
+          <a
+            href={link.href}
+            class="icon-btn"
+            aria-label={link.label}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
+          >
+            <Icon name={link.icon} size={19} />
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

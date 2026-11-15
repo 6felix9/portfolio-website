@@ -1,0 +1,52 @@
+---
+import { Image } from "astro:assets";
+import SocialLinks from "./SocialLinks.astro";
+import profile from "../data/profile.json";
+import { asset } from "../lib/images";
+
+interface Props {
+  index: string;
+}
+
+const { index } = Astro.props;
+const { about } = profile;
+---
+
+<section id="about" class="section">
+  <div class="container-page grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+    <div class="flex justify-center" data-reveal>
+      <figure class="media aspect-[3/4] w-full max-w-md">
+        <Image
+          src={asset(about.portrait.src)}
+          alt={about.portrait.alt}
+          width={896}
+          widths={[448, 720, 896]}
+          sizes="(max-width: 768px) 100vw, 448px"
+          class="h-full w-full object-cover"
+        />
+      </figure>
+    </div>
+
+    <div>
+      <p class="eyebrow flex items-center gap-3" data-reveal>
+        <span>{index}</span>
+        <span class="h-px w-10 bg-line-strong"></span>
+      </p>
+      <h2 class="h-section mt-4" data-reveal style="--i: 1">{about.heading}</h2>
+
+      <div class="mt-6 space-y-5">
+        {
+          about.paragraphs.map((paragraph, i) => (
+            <p class="lead md:text-[1.3rem] md:leading-[1.6]" data-reveal style={`--i: ${i + 2}`}>
+              {paragraph}
+            </p>
+          ))
+        }
+      </div>
+
+      <div class="mt-9" data-reveal style={`--i: ${about.paragraphs.length + 2}`}>
+        <SocialLinks />
+      </div>
+    </div>
+  </div>
+</section>

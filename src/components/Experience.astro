@@ -1,0 +1,246 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+import experience from "../data/experience.json";
+import { asset } from "../lib/images";
+
+interface Props {
+  index: string;
+}
+
+interface ExperienceImage {
+  src: string;
+  href?: string;
+  alt?: string;
+}
+
+const { index } = Astro.props;
+const hostname = (url: string) => new URL(url).hostname.replace(/^www\./, "");
+---
+
+<section id="experience" class="section">
+  <div class="container-page">
+    <SectionHeading index={index} title={experience.heading} subtitle={experience.subtitle} />
+
+    <ol class="timeline" data-timeline>
+      <li class="rail" aria-hidden="true"><span class="rail-fill"></span></li>
+
+      {
+        experience.items.map((item) => {
+          const images: ExperienceImage[] = item.images ?? [];
+          return (
+            <li class="entry">
+              <div class="meta">
+                <span class="marker" data-reveal>
+                  {item.logo ? (
+                    <Image src={asset(item.logo)} alt="" width={96} height={96} class="h-full w-full rounded-full object-contain" />
+                  ) : (
+                    <Icon name="briefcase" size={22} />
+                  )}
+                </span>
+                <div class="meta-text" data-reveal style="--i: 1">
+                  <p class="year">{item.year}</p>
+                  <p class="period">{item.period}</p>
+                </div>
+              </div>
+
+              <div class="body">
+                <div data-reveal style="--i: 1">
+                  <h3 class="text-2xl font-semibold tracking-tight sm:text-3xl">{item.position}</h3>
+                  <p class="mt-2 text-base text-fg/60 md:text-lg">{item.company}</p>
+                </div>
+
+                <div class="mt-6 space-y-3">
+                  {item.description.map((text, i) => (
+                    <p class="text-base leading-relaxed text-fg/80 md:text-lg lg:text-xl lg:leading-relaxed" data-reveal style={`--i: ${i + 2}`}>
+                      {text}
+                    </p>
+                  ))}
+                </div>
+
+                {images.length > 0 && (
+                  <div class="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5">
+                    {images.map((image, i) => {
+                      const alt = image.alt ?? `${item.position} at ${item.company} — photo ${i + 1}`;
+                      const picture = (
+                        <Image
+                          src={asset(image.src)}
+                          alt={alt}
+                          width={960}
+                          widths={[400, 640, 960]}
+                          sizes="(max-width: 640px) 100vw, 340px"
+                          class="h-44 w-full object-cover md:h-52 lg:h-60"
+                        />
+                      );
+                      return (
+                        <div data-reveal style={`--i: ${i + 3}`}>
+                          {image.href ? (
+                            <a href={image.href} target="_blank" rel="noopener noreferrer" class="media group">
+                              {picture}
+                              <span class="visit">
+                                {hostname(image.href)}
+                                <Icon name="arrow-up-right" size={13} />
+                              </span>
+                            </a>
+                          ) : (
+                            <figure class="media">{picture}</figure>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    --marker: 3rem;
+    position: relative;
+    max-width: 64rem;
+    margin-inline: auto;
+  }
+
+  /* The rail fills as you scroll: --progress (0 → 1) is set in scripts/motion.ts */
+  .rail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--marker) / 2 - 1px);
+    width: 2px;
+    background-color: var(--color-line);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
+  }
+  .rail-fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    transform: scaleY(var(--progress, 0));
+    background: linear-gradient(to bottom, rgb(255 255 255 / 0.25), var(--color-fg));
+    will-change: transform;
+  }
+
+  .entry {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 3.5rem;
+  }
+  .entry:nth-child(2) {
+    padding-top: 0.5rem;
+  }
+
+  .meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .marker {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: var(--marker);
+    height: var(--marker);
+    border-radius: 9999px;
+    overflow: hidden;
+    background-color: #000;
+    color: var(--color-muted);
+    box-shadow:
+      0 0 0 1px var(--color-line-strong),
+      0 0 0 6px var(--color-bg);
+  }
+  .year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--color-faint);
+  }
+  .period {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: rgb(250 250 250 / 0.8);
+  }
+  .body {
+    padding-left: calc(var(--marker) + 1rem);
+  }
+
+  @media (min-width: 768px) {
+    .entry {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
+      gap: 2.5rem;
+      padding-top: 7rem;
+    }
+    .entry:nth-child(2) {
+      padding-top: 1rem;
+    }
+    .meta {
+      position: sticky;
+      top: calc(var(--header-h) + 2.5rem);
+      align-self: start;
+      align-items: flex-start;
+      gap: 1.75rem;
+    }
+    .year {
+      font-family: var(--font-sans);
+      font-size: clamp(2.25rem, 1.5rem + 2vw, 3rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--color-faint);
+    }
+    .period {
+      margin-top: 0.625rem;
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: rgb(250 250 250 / 0.68);
+    }
+    .body {
+      padding-left: 0;
+    }
+  }
+
+  .visit {
+    position: absolute;
+    left: 0.625rem;
+    bottom: 0.625rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    background-color: rgb(10 10 10 / 0.78);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    color: var(--color-fg);
+    transition:
+      transform var(--dur) var(--ease),
+      opacity var(--dur) var(--ease);
+  }
+  @media (hover: hover) {
+    .visit {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    .media:hover .visit,
+    .media:focus-visible .visit {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

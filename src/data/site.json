@@ -1,0 +1,17 @@
+{
+  "title": "Puah Tze Foong",
+  "description": "Tze Foong's Playground",
+  "lang": "en",
+  "logoText": "Tze Foong",
+  "nav": [
+    { "label": "About", "href": "#about" },
+    { "label": "Experience", "href": "#experience" },
+    { "label": "Education", "href": "#education" },
+    { "label": "Projects", "href": "#projects" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "footer": {
+    "copyright": "Puah Tze Foong",
+    "backToTop": "Back to top"
+  }
+}

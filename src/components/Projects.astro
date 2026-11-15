@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import SectionHeading from "./SectionHeading.astro";
+import projects from "../data/projects.json";
+import { asset } from "../lib/images";
+
+interface Props {
+  index: string;
+}
+
+const { index } = Astro.props;
+const limit = projects.mobileLimit;
+const hasMore = projects.items.length > limit;
+---
+
+<section id="projects" class="section">
+  <div class="container-page">
+    <SectionHeading index={index} title={projects.heading} subtitle={projects.subtitle} />
+
+    <ul class="project-grid grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3" data-projects data-collapsed={hasMore ? "" : undefined}>
+      {
+        projects.items.map((project, i) => (
+          <li class:list={[{ extra: i >= limit }]} data-reveal style={`--i: ${i % 3}`}>
+            <article class="card flex h-full flex-col">
+              <div class="relative aspect-video w-full overflow-hidden border-b border-line bg-black">
+                <Image
+                  src={asset(project.image)}
+                  alt={`${project.title} screenshot`}
+                  width={800}
+                  widths={[400, 640, 800]}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 360px"
+                  class="zoom h-full w-full object-contain"
+                />
+              </div>
+
+              <div class="flex flex-1 flex-col gap-3 p-5">
+                <h3 class="text-lg font-semibold tracking-tight">{project.title}</h3>
+                <p class="text-sm leading-relaxed text-muted">{project.description}</p>
+
+                <ul class="mt-auto flex flex-wrap gap-1.5 pt-3">
+                  {project.tags.map((tag) => (
+                    <li class="tag">{tag}</li>
+                  ))}
+                </ul>
+
+                {(project.liveUrl || project.repoUrl) && (
+                  <div class="flex gap-5 pt-2 text-sm font-medium">
+                    {project.liveUrl && (
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="link">
+                        Link <Icon name="arrow-up-right" size={14} />
+                      </a>
+                    )}
+                    {project.repoUrl && (
+                      <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="link">
+                        GitHub <Icon name="arrow-up-right" size={14} />
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      hasMore && (
+        <div class="more mt-8 flex justify-center md:hidden">
+          <button type="button" class="btn btn-secondary rounded-full px-6 text-sm" data-projects-more>
+            {projects.showMoreLabel}
+          </button>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  /* On phones only the first few projects show until "View more" is tapped */
+  @media (max-width: 767.98px) {
+    :global(.js) .project-grid[data-collapsed] > .extra {
+      display: none;
+    }
+  }
+  :global(.js) .project-grid:not([data-collapsed]) + .more,
+  :global(html:not(.js)) .more {
+    display: none;
+  }
+</style>

@@ -1,0 +1,39 @@
+{
+  "heading": "Contact Me",
+  "subtitle": "Let's connect and create something amazing together.",
+  "location": {
+    "label": "Singapore",
+    "timezone": "Asia/Singapore",
+    "showLocalTime": true
+  },
+  "links": [
+    {
+      "icon": "mail",
+      "label": "Email",
+      "value": "tzefoong.puah@u.nus.edu",
+      "href": "mailto:tzefoong.puah@u.nus.edu",
+      "showInHero": true
+    },
+    {
+      "icon": "linkedin",
+      "label": "LinkedIn",
+      "value": "Tze Foong Puah",
+      "href": "https://www.linkedin.com/in/tzefoongpuah/",
+      "showInHero": true
+    },
+    {
+      "icon": "github",
+      "label": "GitHub",
+      "value": "6felix9",
+      "href": "https://github.com/6felix9",
+      "showInHero": true
+    },
+    {
+      "icon": "send",
+      "label": "Telegram",
+      "value": "@tzefoong",
+      "href": "https://t.me/tzefoong",
+      "showInHero": false
+    }
+  ]
+}

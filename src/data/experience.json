@@ -1,0 +1,97 @@
+{
+  "heading": "Experience",
+  "subtitle": "A journey through my professional experiences and milestones.",
+  "items": [
+    {
+      "year": "2026",
+      "period": "June - Present",
+      "position": "Software Engineer",
+      "company": "Autodesk · Singapore",
+      "logo": "logos/autodesk-logo.png",
+      "description": [
+        "Building Golang backend services for Autodesk's Enterprise Identity platform, supporting enterprise SSO and automated provisioning through SAML, OIDC, and SCIM.",
+        "Improving service reliability with Catchpoint, Terraform, and Dynatrace observability across production identity workflows."
+      ],
+      "images": [{ "src": "experience/autodesk-photo-1.png" }]
+    },
+    {
+      "year": "2026",
+      "period": "January - April",
+      "position": "Research Assistant",
+      "company": "National University of Singapore · Part-time",
+      "logo": "logos/nus-logo.png",
+      "description": [
+        "Developing CocoLyricist, an AI-powered music and songwriting system for stroke rehabilitation, under Prof. Wang Ye at the School of Computing.",
+        "Building end-to-end ML pipelines with PyTorch and FastAPI, integrated into a Next.js web platform deployed on Vercel."
+      ],
+      "images": [{ "src": "experience/cocolyricist-photo-1.png" }]
+    },
+    {
+      "year": "2025",
+      "period": "January 2025 - April 2026",
+      "position": "Software Engineer",
+      "company": "Freelance Total Rewards Pte Ltd · Singapore",
+      "logo": "",
+      "description": [
+        "Build polished React experiences that hook into the FastAPI services powering an LLM pipeline driven HR management system.",
+        "Recently shipped a data-rich command centre so stakeholders can monitor automation runs at a glance."
+      ],
+      "images": [
+        {
+          "src": "experience/freelance_total_rewards-photo-1.png",
+          "href": "https://jade-staging.vercel.app"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "period": "June - August",
+      "position": "Software Engineer",
+      "company": "KeyReply Pte Ltd · Singapore",
+      "logo": "logos/keyreply-logo.jpeg",
+      "description": [
+        "Led the build of an AI training platform that blends Google Gemini, Groq, Whisper, and ElevenLabs into a real-time digital avatar experience.",
+        "Designed the streaming infrastructure and partnered with clients to iterate quickly, lifting AI response speeds by 225%."
+      ],
+      "images": [
+        { "src": "experience/keyreply-photo-1.JPG" },
+        { "src": "experience/keyreply-photo-2.png" }
+      ]
+    },
+    {
+      "year": "2025",
+      "period": "June 2025 - April 2026",
+      "position": "Vice President",
+      "company": "Raffles Hall Developers · Singapore",
+      "logo": "logos/rhdevs-logo.jpeg",
+      "description": [
+        "Organise hands-on workshops and hackathons that keep the Raffles Hall developer community growing.",
+        "Lead the engineering team that ships and maintains the apps and Telegram bots used daily by 700+ residents."
+      ],
+      "images": [
+        { "src": "experience/rhdevs-photo-1.jpg" },
+        {
+          "src": "experience/rhdevs-photo-2.png",
+          "href": "https://new.rhapp.lol"
+        }
+      ]
+    },
+    {
+      "year": "2024",
+      "period": "April - June",
+      "position": "Software Engineer",
+      "company": "Foo Well Home Sdn Bhd · Malaysia",
+      "logo": "logos/foo_well_home-logo.jpg",
+      "description": [
+        "Delivered a property management portal with React and Supabase that keeps thousands of units and records organised.",
+        "Added secure RBAC, modern auth, and a real-time service desk so tenants, owners, and admins stay in sync."
+      ],
+      "images": [
+        {
+          "src": "experience/foo_well_home-photo-1.png",
+          "href": "https://www.foowellhome.com"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+---
+import { getImage } from "astro:assets";
+import Icon from "./Icon.astro";
+import SocialLinks from "./SocialLinks.astro";
+import profile from "../data/profile.json";
+import { asset } from "../lib/images";
+
+const { hero, role } = profile;
+
+// Longest line the heading can show ("Tze Foong's Adventures."), in characters.
+// The heading's font-size is derived from it so the rotating word always fits
+// on the same line as the lead-in — two lines total, whatever words are in
+// profile.json.
+const longestLine = Math.max(
+  hero.greeting.length,
+  ...hero.flipWords.map((word) => hero.lead.length + 1 + word.length),
+);
+
+// A small optimised copy of the portrait: the canvas only needs ~1 sample
+// every few pixels, so there's no reason to ship the full-size photo.
+const portrait = await getImage({
+  src: asset(hero.portrait.src),
+  width: 720,
+  format: "webp",
+  quality: 80,
+});
+---
+
+<section id="top" class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="container-page hero-inner">
+    <div class="portrait">
+      <canvas
+        class="portrait-canvas"
+        data-pixel-portrait
+        data-src={portrait.src}
+        role="img"
+        aria-label={hero.portrait.alt}></canvas>
+      <noscript>
+        <img src={portrait.src} alt={hero.portrait.alt} class="portrait-fallback" />
+      </noscript>
+    </div>
+
+    <div class="hero-copy flex w-full flex-col items-start gap-6">
+      <h1 class="hero-title" data-reveal style={`--i: 1; --chars: ${longestLine}`}>
+        {hero.greeting}<br />
+        {hero.lead}{" "}
+        <span class="flip" data-flip={JSON.stringify(hero.flipWords)}>
+          <span class="sr-only">{hero.flipWords[0]}</span>
+          {/* Invisible copies of every word reserve the widest one's space,
+              so the heading never re-wraps when the word changes. */}
+          {hero.flipWords.map((word) => <span class="flip-sizer" aria-hidden="true">{word}</span>)}
+          <span class="flip-word" aria-hidden="true" data-flip-word>{hero.flipWords[0]}</span>
+        </span>
+      </h1>
+
+      <hr class="hero-rule" data-reveal="line" style="--i: 3" />
+
+      <p class="text-lg text-fg/70 md:text-xl lg:text-2xl" data-reveal style="--i: 4">
+        {role}
+      </p>
+
+      <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4" data-reveal style="--i: 5">
+        {
+          hero.buttons.map((button) => (
+            <a href={button.href} class:list={["btn", button.style === "primary" ? "btn-primary" : "btn-secondary"]}>
+              {button.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <div data-reveal style="--i: 6">
+        <SocialLinks />
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue-wrap" data-reveal style="--i: 9">
+    <a href="#about" class="scroll-cue" aria-label="Scroll to About">
+      <Icon name="arrow-down" size={16} />
+    </a>
+  </div>
+</section>
+
+<script>
+  import "../scripts/pixel-portrait.ts";
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100svh;
+    padding-top: 6.5rem;
+    padding-bottom: 5.5rem;
+    overflow: hidden;
+  }
+
+  /* Faint dot grid echoing the pixel portrait, fading out toward the edges */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgb(255 255 255 / 0.11) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 75%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: 2.5rem;
+  }
+  @media (min-width: 768px) {
+    .hero-inner {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: 3rem;
+    }
+  }
+
+  .portrait {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    margin-inline: auto;
+    border-radius: 0.875rem;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow:
+      0 0 0 1px var(--color-line),
+      0 30px 60px -30px rgb(0 0 0 / 0.9);
+  }
+  .portrait-canvas,
+  .portrait-fallback {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* The text column is a size container so the heading can scale to it. */
+  .hero-copy {
+    container-type: inline-size;
+  }
+
+  /* ~0.5em per character on average, so 200cqi / chars is the largest size at
+     which the longest line still fits the column. Capped at 3rem. */
+  .hero-title {
+    font-size: min(3rem, calc(200cqi / var(--chars, 23)));
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  .flip {
+    display: inline-grid;
+    white-space: nowrap;
+  }
+  .flip-sizer,
+  .flip-word {
+    grid-area: 1 / 1;
+  }
+  .flip-sizer {
+    visibility: hidden;
+  }
+  /* Letters share the reveal's rise + fade + blur so the hero word and the
+     rest of the page move the same way. */
+  .flip-word :global(.flip-char) {
+    display: inline-block;
+    opacity: 0;
+    transform: translate3d(0, 0.35em, 0);
+    filter: blur(8px);
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease),
+      filter var(--dur) var(--ease);
+    transition-delay: calc(var(--c, 0) * 32ms);
+  }
+  .flip-word.is-in :global(.flip-char) {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .flip-word.is-out :global(.flip-char) {
+    opacity: 0;
+    transform: translate3d(0, -0.35em, 0);
+    filter: blur(8px);
+    transition-duration: 320ms;
+    transition-delay: calc(var(--c, 0) * 14ms);
+  }
+
+  .hero-rule {
+    width: 100%;
+    height: 3px;
+    border: 0;
+    border-radius: 3px;
+    background-color: var(--color-muted);
+  }
+
+  .scroll-cue-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 1.75rem;
+    margin-left: -1.125rem;
+  }
+  .scroll-cue {
+    display: none;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    color: var(--color-faint);
+    transition:
+      color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease);
+  }
+  @media (min-width: 768px) and (min-height: 700px) {
+    .scroll-cue {
+      display: grid;
+    }
+  }
+  .scroll-cue:hover {
+    color: var(--color-fg);
+    border-color: var(--color-line-strong);
+  }
+  .scroll-cue :global(svg) {
+    animation: nudge 2.4s var(--ease) infinite;
+  }
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translateY(-2px);
+    }
+    50% {
+      transform: translateY(2px);
+    }
+  }
+</style>
