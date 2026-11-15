@@ -15,6 +15,10 @@
       "src": "hero/hero-portrait.jpg",
       "alt": "Tze Foong at Marina Bay, Singapore, at night"
     },
+    "portraitLight": {
+      "src": "hero/hero-portrait-light.jpg",
+      "alt": "Tze Foong outdoors on a sunny day"
+    },
     "buttons": [
       { "label": "View Projects", "href": "#projects", "style": "primary" },
       { "label": "Contact Me", "href": "#contact", "style": "secondary" }

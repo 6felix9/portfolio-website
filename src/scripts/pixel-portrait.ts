@@ -6,14 +6,15 @@
  *  - Click / tap sends a ripple that re-assembles the picture from that point.
  *  - When nothing is moving the animation loop stops completely: the finished
  *    picture is cached on an offscreen canvas and the page does zero work.
+ *  - It follows the site theme: the gap colour comes from the --portrait-bg
+ *    CSS variable, and an optional second photo can be used in light mode.
  *
- * Usage: <canvas data-pixel-portrait data-src="/path/to/image.webp">
+ * Usage: <canvas data-pixel-portrait data-src="/dark.webp" data-src-light="/light.webp">
  */
 
 const CELL = 4; // grid spacing in CSS px
 const DOT_SCALE = 0.9; // dot size relative to the cell
-const BACKGROUND = "#000";
-const MIN_LUMA = 9; // near-black cells are skipped (they match the background)
+const SKIP_DISTANCE = 24; // cells this close to the background colour are skipped
 
 const INTRO_DURATION = 0.75; // seconds each dot takes to settle
 const INTRO_SPREAD = 0.75; // seconds between the first and last dot starting
@@ -35,9 +36,12 @@ const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 4);
 
 function createPortrait(canvas: HTMLCanvasElement) {
-  const src = canvas.dataset.src;
   const ctx = canvas.getContext("2d", { alpha: false });
-  if (!src || !ctx) return;
+  if (!canvas.dataset.src || !ctx) return;
+
+  const isLight = () => document.documentElement.dataset.theme === "light";
+  const sourceFor = () => (isLight() && canvas.dataset.srcLight) || canvas.dataset.src!;
+  const altFor = () => (isLight() && canvas.dataset.altLight) || canvas.dataset.alt || "";
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -48,6 +52,9 @@ function createPortrait(canvas: HTMLCanvasElement) {
 
   let ready = false;
   let visible = true;
+  let background = "#000";
+  let loadedSrc = "";
+  let loadToken = 0;
   let raf = 0;
 
   let width = 0;
@@ -92,6 +99,13 @@ function createPortrait(canvas: HTMLCanvasElement) {
     sample.width = cols;
     sample.height = rows;
     const sampleCtx = sample.getContext("2d", { willReadFrequently: true })!;
+
+    // Background colour for the current theme, resolved to RGB so cells that
+    // would be invisible against it can be skipped.
+    background = getComputedStyle(canvas).getPropertyValue("--portrait-bg").trim() || "#000";
+    sampleCtx.fillStyle = background;
+    sampleCtx.fillRect(0, 0, 1, 1);
+    const [bgR, bgG, bgB] = sampleCtx.getImageData(0, 0, 1, 1).data;
     const imageRatio = image.naturalWidth / image.naturalHeight;
     const gridRatio = cols / rows;
     let sw = image.naturalWidth;
@@ -111,7 +125,7 @@ function createPortrait(canvas: HTMLCanvasElement) {
         const r = pixels[i * 4];
         const g = pixels[i * 4 + 1];
         const b = pixels[i * 4 + 2];
-        if (0.2126 * r + 0.7152 * g + 0.0722 * b < MIN_LUMA) {
+        if (Math.abs(r - bgR) + Math.abs(g - bgG) + Math.abs(b - bgB) < SKIP_DISTANCE) {
           dots[i] = null;
           continue;
         }
@@ -127,7 +141,7 @@ function createPortrait(canvas: HTMLCanvasElement) {
     }
 
     stillCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    stillCtx.fillStyle = BACKGROUND;
+    stillCtx.fillStyle = background;
     stillCtx.fillRect(0, 0, width, height);
     for (const dot of dots) {
       if (!dot) continue;
@@ -146,7 +160,7 @@ function createPortrait(canvas: HTMLCanvasElement) {
     const elapsed = (now - introStart) / 1000;
     let settled = true;
     ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx!.fillStyle = BACKGROUND;
+    ctx!.fillStyle = background;
     ctx!.fillRect(0, 0, width, height);
     for (const dot of dots) {
       if (!dot) continue;
@@ -178,7 +192,7 @@ function createPortrait(canvas: HTMLCanvasElement) {
     const row1 = Math.min(rows - 1, Math.ceil((pointer.y + reach - offsetY) / CELL));
     if (col1 < col0 || row1 < row0) return;
 
-    ctx!.fillStyle = BACKGROUND;
+    ctx!.fillStyle = background;
     ctx!.fillRect(
       offsetX + col0 * CELL,
       offsetY + row0 * CELL,
@@ -287,23 +301,38 @@ function createPortrait(canvas: HTMLCanvasElement) {
     }, 150);
   }).observe(canvas);
 
-  image.decoding = "async";
-  image.src = src;
-  image
-    .decode()
-    .then(() => {
+  /** Load the photo for the current theme (if it isn't already), then assemble it. */
+  function load() {
+    const src = sourceFor();
+    const token = ++loadToken;
+    canvas.setAttribute("aria-label", altFor());
+
+    const show = () => {
+      if (token !== loadToken) return; // a newer load superseded this one
+      loadedSrc = src;
       build();
       ready = true;
-      if (introDone) {
-        drawStill();
-      } else {
-        introStart = performance.now();
-        request();
-      }
-    })
-    .catch(() => {
-      /* image failed to load — leave the canvas blank */
-    });
+      if (reduceMotion) drawStill();
+      else replay();
+    };
+
+    if (src === loadedSrc) {
+      show();
+      return;
+    }
+    image.decoding = "async";
+    image.src = src;
+    image
+      .decode()
+      .then(show)
+      .catch(() => {
+        /* image failed to load — leave the canvas as it is */
+      });
+  }
+
+  // Re-sample and re-assemble whenever the site theme changes.
+  document.addEventListener("themechange", load);
+  load();
 }
 
 document.querySelectorAll<HTMLCanvasElement>("canvas[data-pixel-portrait]").forEach(createPortrait);

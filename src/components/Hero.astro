@@ -18,12 +18,12 @@ const longestLine = Math.max(
 
 // A small optimised copy of the portrait: the canvas only needs ~1 sample
 // every few pixels, so there's no reason to ship the full-size photo.
-const portrait = await getImage({
-  src: asset(hero.portrait.src),
-  width: 720,
-  format: "webp",
-  quality: 80,
-});
+const optimise = (src: string) => getImage({ src: asset(src), width: 720, format: "webp", quality: 80 });
+const portrait = await optimise(hero.portrait.src);
+
+// Optional second photo for the light theme. Remove "portraitLight" from
+// profile.json (or leave its src empty) to use the same photo in both themes.
+const portraitLight = hero.portraitLight?.src ? await optimise(hero.portraitLight.src) : null;
 ---
 
 <section id="top" class="hero">
@@ -35,6 +35,9 @@ const portrait = await getImage({
         class="portrait-canvas"
         data-pixel-portrait
         data-src={portrait.src}
+        data-alt={hero.portrait.alt}
+        data-src-light={portraitLight?.src}
+        data-alt-light={portraitLight ? hero.portraitLight.alt : undefined}
         role="img"
         aria-label={hero.portrait.alt}></canvas>
       <noscript>
@@ -103,7 +106,7 @@ const portrait = await getImage({
   .hero-grid {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgb(255 255 255 / 0.11) 1px, transparent 1px);
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
     background-size: 22px 22px;
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 75%);
     mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 75%);
@@ -132,10 +135,10 @@ const portrait = await getImage({
     margin-inline: auto;
     border-radius: 0.875rem;
     overflow: hidden;
-    background-color: #000;
+    background-color: var(--portrait-bg);
     box-shadow:
       0 0 0 1px var(--color-line),
-      0 30px 60px -30px rgb(0 0 0 / 0.9);
+      0 30px 60px -30px var(--shadow);
   }
   .portrait-canvas,
   .portrait-fallback {

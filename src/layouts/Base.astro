@@ -13,12 +13,12 @@ const { title = site.title, description = site.description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={site.lang}>
+<html lang={site.lang} data-theme={site.defaultTheme}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0a0a0a" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="dark light" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
@@ -26,10 +26,19 @@ const { title = site.title, description = site.description } = Astro.props;
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <!-- Marks the document as JS-enabled before first paint so reveal
-         animations never flash; without JS everything is simply visible. -->
-    <script is:inline>
-      document.documentElement.classList.add("js");
+    <!-- Runs before first paint:
+         - marks the document as JS-enabled so reveal animations never flash
+           (without JS everything is simply visible)
+         - applies the visitor's saved theme, or the default from site.json,
+           so the page never flashes the wrong palette. -->
+    <script is:inline define:vars={{ defaultTheme: site.defaultTheme }}>
+      const root = document.documentElement;
+      root.classList.add("js");
+      let saved = null;
+      try {
+        saved = localStorage.getItem("theme");
+      } catch {}
+      root.dataset.theme = saved === "light" || saved === "dark" ? saved : defaultTheme;
     </script>
   </head>
   <body>

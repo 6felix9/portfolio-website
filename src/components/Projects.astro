@@ -23,7 +23,7 @@ const hasMore = projects.items.length > limit;
         projects.items.map((project, i) => (
           <li class:list={[{ extra: i >= limit }]} data-reveal style={`--i: ${i % 3}`}>
             <article class="card flex h-full flex-col">
-              <div class="relative aspect-video w-full overflow-hidden border-b border-line bg-black">
+              <div class="relative aspect-video w-full overflow-hidden border-b border-line bg-well">
                 <Image
                   src={asset(project.image)}
                   alt={`${project.title} screenshot`}

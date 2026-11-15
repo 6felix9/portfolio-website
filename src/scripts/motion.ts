@@ -9,6 +9,7 @@
  *   6. Flip words    — rotating hero word
  *   7. Local time    — live clock in the contact section
  *   8. Projects      — "View more" on mobile
+ *   9. Theme         — dark / light switch with a circular reveal
  *
  * The visuals for each are in CSS; this file only toggles classes and sets
  * custom properties, so timing/easing stays defined in one place
@@ -292,6 +293,71 @@ function initProjects() {
   more.addEventListener("click", () => grid.removeAttribute("data-collapsed"));
 }
 
+/* 9. Theme ----------------------------------------------------------- */
+type Theme = "dark" | "light";
+
+function initTheme() {
+  const root = document.documentElement;
+  const buttons = $$<HTMLButtonElement>("[data-theme-toggle]");
+  const themeColor = $<HTMLMetaElement>('meta[name="theme-color"]');
+
+  const current = (): Theme => (root.dataset.theme === "light" ? "light" : "dark");
+
+  /** Keep everything that mirrors the theme (labels, browser chrome) in step. */
+  const sync = () => {
+    const next = current() === "dark" ? "light" : "dark";
+    for (const button of buttons) button.setAttribute("aria-label", `Switch to ${next} theme`);
+    themeColor?.setAttribute("content", getComputedStyle(root).getPropertyValue("--color-bg").trim());
+  };
+
+  const apply = (theme: Theme) => {
+    root.dataset.theme = theme;
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      /* private mode — the choice just won't be remembered */
+    }
+    sync();
+    document.dispatchEvent(new CustomEvent<Theme>("themechange", { detail: theme }));
+  };
+
+  sync();
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      const next: Theme = current() === "dark" ? "light" : "dark";
+
+      // Without the View Transitions API (or with reduced motion) just switch.
+      if (reduceMotion || !("startViewTransition" in document)) {
+        apply(next);
+        return;
+      }
+
+      // Otherwise reveal the new theme as a circle growing out of the button.
+      const rect = button.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+
+      const transition = document.startViewTransition(() => apply(next));
+      transition.ready
+        .then(() => {
+          root.animate(
+            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+            {
+              duration: 750,
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+              pseudoElement: "::view-transition-new(root)",
+            },
+          );
+        })
+        .catch(() => {
+          /* transition skipped — the theme has still been applied */
+        });
+    });
+  }
+}
+
 initReveal();
 initHeader();
 initNav();
@@ -300,3 +366,4 @@ initSpotlight();
 initFlipWords();
 initLocalTime();
 initProjects();
+initTheme();

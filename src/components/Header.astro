@@ -1,4 +1,5 @@
 ---
+import Icon from "./Icon.astro";
 import site from "../data/site.json";
 ---
 
@@ -8,28 +9,35 @@ import site from "../data/site.json";
       {site.logoText}
     </a>
 
-    <nav class="nav" aria-label="Primary" data-nav>
-      <span class="nav-indicator" data-nav-indicator aria-hidden="true"></span>
-      {
-        site.nav.map((item) => (
-          <a href={item.href} class="nav-link" data-nav-link>
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
+    <div class="right">
+      <nav class="nav" aria-label="Primary" data-nav>
+        <span class="nav-indicator" data-nav-indicator aria-hidden="true"></span>
+        {
+          site.nav.map((item) => (
+            <a href={item.href} class="nav-link" data-nav-link>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
 
-    <button
-      type="button"
-      class="menu-btn"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      data-menu-btn
-    >
-      <span></span>
-      <span></span>
-    </button>
+      <button type="button" class="theme-btn" aria-label="Switch theme" data-theme-toggle>
+        <Icon name="moon" size={17} class="moon" />
+        <Icon name="sun" size={17} class="sun" />
+      </button>
+
+      <button
+        type="button"
+        class="menu-btn"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-btn
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </div>
 
   <div id="mobile-menu" class="mobile-menu" data-mobile-menu>
@@ -82,11 +90,11 @@ import site from "../data/site.json";
   }
   .site-header[data-scrolled] .bar,
   .site-header[data-open] .bar {
-    background-color: rgb(14 14 14 / 0.72);
+    background-color: var(--glass);
     -webkit-backdrop-filter: blur(14px) saturate(1.4);
     backdrop-filter: blur(14px) saturate(1.4);
     border-color: var(--color-line);
-    box-shadow: 0 10px 30px -18px rgb(0 0 0 / 0.9);
+    box-shadow: 0 10px 30px -18px var(--shadow);
   }
   @media (min-width: 768px) {
     .site-header[data-scrolled] .bar {
@@ -135,13 +143,59 @@ import site from "../data/site.json";
     height: 2.125rem;
     width: var(--w, 0px);
     border-radius: 9999px;
-    background-color: rgb(255 255 255 / 0.09);
+    background-color: var(--hover);
     opacity: var(--o, 0);
     transform: translate3d(var(--x, 0px), -50%, 0);
     transition:
       transform var(--dur) var(--ease),
       width var(--dur) var(--ease),
       opacity var(--dur-fast) var(--ease);
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  /* Theme toggle: moon in dark mode, sun in light mode. The two icons are
+     stacked and swap with a quarter turn. */
+  .theme-btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    color: var(--color-muted);
+    transition:
+      color var(--dur-fast) var(--ease),
+      background-color var(--dur-fast) var(--ease);
+  }
+  .theme-btn:hover {
+    color: var(--color-fg);
+    background-color: var(--hover);
+  }
+  :global(html:not(.js)) .theme-btn {
+    display: none;
+  }
+  .theme-btn :global(svg) {
+    grid-area: 1 / 1;
+    transition:
+      transform var(--dur) var(--ease),
+      opacity var(--dur) var(--ease);
+  }
+  .theme-btn :global(.sun) {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+  :global([data-theme="light"]) .theme-btn :global(.sun) {
+    opacity: 1;
+    transform: none;
+  }
+  :global([data-theme="light"]) .theme-btn :global(.moon) {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
   }
 
   /* Mobile menu */
@@ -187,7 +241,7 @@ import site from "../data/site.json";
     margin-top: 0.5rem;
     border: 1px solid transparent;
     border-radius: 1.25rem;
-    background-color: rgb(14 14 14 / 0.86);
+    background-color: var(--glass-strong);
     -webkit-backdrop-filter: blur(14px) saturate(1.4);
     backdrop-filter: blur(14px) saturate(1.4);
     opacity: 0;

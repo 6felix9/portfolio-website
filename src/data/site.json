@@ -3,6 +3,7 @@
   "description": "Tze Foong's Playground",
   "lang": "en",
   "logoText": "Tze Foong",
+  "defaultTheme": "dark",
   "nav": [
     { "label": "About", "href": "#about" },
     { "label": "Experience", "href": "#experience" },
