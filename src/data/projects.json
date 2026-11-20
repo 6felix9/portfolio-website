@@ -29,8 +29,8 @@
         "OpenAI",
         "ChromaDB"
       ],
-      "liveUrl": "https://vibeplan-app.vercel.app/",
-      "repoUrl": "https://github.com/cursor-hackathon-19ju/vibeplan"
+      "liveUrl": "https://vibeplan-deals.vercel.app",
+      "repoUrl": "https://github.com/6felix9/vibeplan"
     },
     {
       "title": "Telegram Relay Server",
