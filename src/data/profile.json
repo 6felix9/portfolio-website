@@ -17,8 +17,8 @@
       "alt": "Tze Foong at Marina Bay, Singapore, at night"
     },
     "portraitLight": {
-      "src": "hero/hero-portrait-light.jpg",
-      "alt": "Tze Foong outdoors on a sunny day"
+      "src": "hero/hero-portrait-light-boat.jpg",
+      "alt": "Tze Foong on a boat at sea, with a catamaran in the background"
     },
     "buttons": [
       { "label": "View Projects", "href": "#projects", "style": "primary" },
