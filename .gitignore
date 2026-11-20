@@ -19,3 +19,4 @@ pnpm-debug.log*
 # editor / tooling
 .vscode/
 .idea/
+.vercel

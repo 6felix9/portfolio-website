@@ -2,15 +2,16 @@
   "name": "Puah Tze Foong",
   "role": "Full Stack Developer",
   "hero": {
-    "greeting": "Welcome to",
-    "lead": "Tze Foong's",
+    "nameLines": ["Tze Foong", "Puah"],
+    "lead": "I build",
     "flipWords": [
-      "Portfolio.",
-      "Playground.",
-      "Showcase.",
-      "Creations.",
-      "Adventures."
+      "AI agents.",
+      "web apps.",
+      "Telegram bots.",
+      "side projects.",
+      "fun stuff."
     ],
+    "tagline": "Penultimate-year Computer Science student, seeking roles in backend and AI engineering.",
     "portrait": {
       "src": "hero/hero-portrait.jpg",
       "alt": "Tze Foong at Marina Bay, Singapore, at night"
@@ -27,7 +28,7 @@
   "about": {
     "heading": "About Me",
     "paragraphs": [
-      "Full Stack Developer passionate about AI technologies and agentic tools. Experienced in building end-to-end solutions that leverage artificial intelligence to solve real-world problems.",
+      "Software engineer passionate about backend engineering, AI agents, distributed systems and harness design, and drawn to hard problems that bring them together.",
       "Always exploring the latest in AI advancements and tools, blending curiosity with code to create meaningful impact. When not building, you'll find me on the floorball court or vibe coding to some mandopop."
     ],
     "portrait": {
