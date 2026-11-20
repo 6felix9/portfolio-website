@@ -167,6 +167,13 @@ const hasLight = Boolean(hero.portraitLight?.src);
   }
   /* Phones: photo first, a little shorter so the name still shows above
      the fold. */
+  /* Desktop: pin the photo to the right edge of the page container so it
+     lines up with the page margins (and the About photo on the left). */
+  @media (min-width: 768px) {
+    .photo {
+      margin-inline: auto 0;
+    }
+  }
   @media (max-width: 767px) {
     .hero {
       align-items: flex-start;

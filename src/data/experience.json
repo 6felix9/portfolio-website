@@ -12,7 +12,7 @@
         "Building Golang backend services for Autodesk's Enterprise Identity platform, supporting enterprise SSO and automated provisioning through SAML, OIDC, and SCIM.",
         "Improving service reliability with Catchpoint, Terraform, and Dynatrace observability across production identity workflows."
       ],
-      "images": [{ "src": "experience/autodesk-photo-1.png" }]
+      "images": [{ "src": "experience/autodesk-photo-1.png", "fit": "contain", "background": "#fff" }]
     },
     {
       "year": "2026",
@@ -28,7 +28,7 @@
     },
     {
       "year": "2025",
-      "period": "January 2025 - April 2026",
+      "period": "August 2025 - April 2026",
       "position": "Software Engineer",
       "company": "Freelance Total Rewards Pte Ltd · Singapore",
       "logo": "",
@@ -55,7 +55,7 @@
       ],
       "images": [
         { "src": "experience/keyreply-photo-1.JPG" },
-        { "src": "experience/keyreply-photo-2.png" }
+        { "src": "experience/keyreply-photo-2-full.png" }
       ]
     },
     {

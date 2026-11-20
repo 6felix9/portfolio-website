@@ -8,65 +8,211 @@
       "title": "Telegram GPT",
       "description": "A LangGraph-powered Telegram agent that lives in group chats as an assistant — with tool use, persistent memory, and multi-step reasoning.",
       "image": "projects/telegram-gpt-photo-1.png",
-      "tags": ["LangGraph", "Python", "PostgreSQL", "OpenAI", "Telegram API"],
+      "tags": [
+        "LangGraph",
+        "Python",
+        "PostgreSQL",
+        "OpenAI",
+        "Telegram API"
+      ],
       "liveUrl": "https://t.me/tzefoong_gpt_bot",
-      "repoUrl": ""
+      "repoUrl": "https://github.com/6felix9/telegram-gpt"
     },
     {
       "title": "VibePlan",
       "description": "An AI-powered itinerary planner for Singapore that scrapes live social media data to recommend activities based on vibe, budget, and real-time trends.",
       "image": "projects/vibeplan-photo-1.png",
-      "tags": ["Next.js", "TypeScript", "Supabase", "OpenAI", "ChromaDB"],
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "OpenAI",
+        "ChromaDB"
+      ],
       "liveUrl": "https://vibeplan-app.vercel.app/",
       "repoUrl": "https://github.com/cursor-hackathon-19ju/vibeplan"
+    },
+    {
+      "title": "Telegram Relay Server",
+      "description": "A C++17 proxy in front of the Telegram Bot API with token-bucket rate limiting, priority lanes for noisy chats, and backpressure that returns 503s instead of getting a bot throttled.",
+      "image": "projects/telegram-relay-server-photo-1.png",
+      "tags": [
+        "C++17",
+        "CMake",
+        "OpenSSL",
+        "Docker"
+      ],
+      "liveUrl": "",
+      "repoUrl": "https://github.com/6felix9/telegram-relay-server"
+    },
+    {
+      "title": "Cloom",
+      "description": "A native macOS screen recorder with a draggable webcam bubble, multi-track audio, and automatic 1080p export, built with no external dependencies.",
+      "image": "projects/cloom-photo-1.png",
+      "tags": [
+        "Swift",
+        "SwiftUI",
+        "ScreenCaptureKit"
+      ],
+      "liveUrl": "",
+      "repoUrl": "https://github.com/6felix9/cloom"
     },
     {
       "title": "MoneyGo",
       "description": "A cross-platform personal finance mobile app featuring AI receipt scanning, expense tracking, and data visualization.",
       "image": "projects/moneygo-photo-1.png",
-      "tags": ["React Native", "Expo", "Supabase", "Gemini AI"],
+      "tags": [
+        "React Native",
+        "Expo",
+        "Supabase",
+        "Gemini AI"
+      ],
       "liveUrl": "",
       "repoUrl": "https://github.com/6felix9/moneygo"
     },
     {
-      "title": "NotiflyMeBot",
-      "description": "A Telegram reminder bot that uses Gemini AI & Duckling to parse natural language dates (e.g., 'tomorrow at 3pm') and schedules automated alerts.",
-      "image": "projects/notiflyme-photo-1.png",
-      "tags": ["Python", "MongoDB", "Gemini AI", "Telegram API"],
+      "title": "Open Research",
+      "description": "An agentic hackathon ideation tool that profiles sponsors, cross-references prior Devpost and GitHub projects, and streams back ranked idea briefs with verified citations.",
+      "image": "projects/open-research-photo-1.png",
+      "tags": [
+        "FastAPI",
+        "React",
+        "TypeScript",
+        "OpenAI",
+        "SSE"
+      ],
       "liveUrl": "",
-      "repoUrl": "https://github.com/6felix9/notiflyme-bot"
+      "repoUrl": "https://github.com/6felix9/open-research"
+    },
+    {
+      "title": "Kanye Soundboard",
+      "description": "A 30-pad sampler for playing with sounds from Runaway and Stronger, with keyboard controls and a built-in instrumental deck. A fun, non-commercial side project.",
+      "image": "projects/kanye-soundboard-photo-1.png",
+      "tags": [
+        "JavaScript",
+        "CSS",
+        "Python"
+      ],
+      "liveUrl": "https://kanye-soundboard.vercel.app",
+      "repoUrl": "https://github.com/6felix9/kanye-soundboard"
+    },
+    {
+      "title": "chud",
+      "description": "An autonomous dating intern that swipes, chats in your tone, and plans dates so you can keep coding. A 'Sup Hackathon 2026 entry that almost worked.",
+      "image": "projects/chud-ai-photo-1.png",
+      "tags": [
+        "Python",
+        "React",
+        "TypeScript",
+        "Telegram API"
+      ],
+      "liveUrl": "https://chuddy-ai.vercel.app",
+      "repoUrl": "https://github.com/6felix9/chud-ai"
+    },
+    {
+      "title": "Felix's Calendar Agent",
+      "description": "A Telegram agent that creates, edits, and deletes Google Calendar events from natural language or photos of flyers, with confirm/cancel buttons for every staged change.",
+      "image": "projects/calendar-agent-photo-1.png",
+      "tags": [
+        "Python",
+        "OpenAI",
+        "Google Workspace",
+        "Telegram API",
+        "Railway"
+      ],
+      "liveUrl": "",
+      "repoUrl": "https://github.com/6felix9/gws-calendar-bot"
+    },
+    {
+      "title": "Lyra AI",
+      "description": "A music therapy platform for seniors with Parkinson's, Alzheimer's, and stroke, combining personalised AI-generated songs with adaptive piano-tile exercises. Built for Hack N Roll 2026.",
+      "image": "projects/lyra-ai-dashboard.png",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Express",
+        "OpenAI",
+        "ElevenLabs"
+      ],
+      "liveUrl": "",
+      "repoUrl": "https://github.com/6felix9/Lyra-AI"
+    },
+    {
+      "title": "GrantAI",
+      "description": "A grant discovery engine for nonprofits that matches project ideas to funding through pgvector semantic search and LLM fit analysis, with a chatbot to explain each grant.",
+      "image": "projects/grantai-photo-1.png",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "pgvector",
+        "Gemini AI"
+      ],
+      "liveUrl": "https://grantai-app.vercel.app",
+      "repoUrl": "https://github.com/6felix9/GrantAI"
     },
     {
       "title": "NUS GPA Calculator",
       "description": "A rich academic tracking tool for NUS students to compute CAP/GPA, featuring CSV import/export, semester filtering, and local storage persistence.",
-      "image": "projects/nus-cap-calculator-photo-1.png",
-      "tags": ["React", "Vite", "TypeScript", "Tailwind CSS"],
+      "image": "projects/nus-gpa-calculator-dashboard.png",
+      "tags": [
+        "React",
+        "Vite",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
       "liveUrl": "https://nus-cap-calculator.vercel.app/",
-      "repoUrl": ""
-    },
-    {
-      "title": "Tze Foong's Timer",
-      "description": "A URL-based timer and stopwatch application allowing instant configuration via URL paths with a clean, responsive Tailwind UI.",
-      "image": "projects/tzefoong-timer-photo-1.png",
-      "tags": ["React", "Vite", "Tailwind CSS"],
-      "liveUrl": "https://tzefoongtimer.pages.dev",
-      "repoUrl": "https://github.com/6felix9/tzefoong-timer"
-    },
-    {
-      "title": "Heartfelt Support Bot",
-      "description": "An anonymous Telegram bot connecting users with support members while maintaining complete privacy for both parties via masked identities.",
-      "image": "projects/heartfelt-bot-photo-1.png",
-      "tags": ["Python", "MongoDB", "Telegram API"],
-      "liveUrl": "https://t.me/hearhtfelt_companion_bot",
       "repoUrl": ""
     },
     {
       "title": "Raffles Hall Confessions Bot",
       "description": "A Telegram bot facilitating anonymous confessions posted to a channel with public comment threads, managing user anonymity.",
       "image": "projects/rh-confession-photo-1.jpg",
-      "tags": ["Python", "Telegram API"],
+      "tags": [
+        "Python",
+        "Telegram API"
+      ],
       "liveUrl": "https://t.me/rh_confession_bot",
       "repoUrl": ""
+    },
+    {
+      "title": "NotiflyMeBot",
+      "description": "A Telegram reminder bot that turns plain English like 'tomorrow at 3pm' into a scheduled alert, using Groq to parse dates and Celery workers to deliver reminders on time.",
+      "image": "projects/notiflyme-chat-window.png",
+      "tags": [
+        "Python",
+        "Groq",
+        "MongoDB",
+        "Celery",
+        "Redis",
+        "Telegram API"
+      ],
+      "liveUrl": "",
+      "repoUrl": "https://github.com/6felix9/notiflyme-bot"
+    },
+    {
+      "title": "Heartfelt Support Bot",
+      "description": "An anonymous Telegram bot connecting users with support members while maintaining complete privacy for both parties via masked identities.",
+      "image": "projects/heartfelt-bot-photo-1.png",
+      "tags": [
+        "Python",
+        "MongoDB",
+        "Telegram API"
+      ],
+      "liveUrl": "https://t.me/hearhtfelt_companion_bot",
+      "repoUrl": ""
+    },
+    {
+      "title": "Tze Foong's Timer",
+      "description": "A URL-based timer and stopwatch application allowing instant configuration via URL paths with a clean, responsive Tailwind UI.",
+      "image": "projects/tzefoong-timer-photo-1.png",
+      "tags": [
+        "React",
+        "Vite",
+        "Tailwind CSS"
+      ],
+      "liveUrl": "https://tzefoongtimer.pages.dev",
+      "repoUrl": "https://github.com/6felix9/tzefoong-timer"
     }
   ]
 }

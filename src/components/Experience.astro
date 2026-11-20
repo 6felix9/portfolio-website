@@ -13,6 +13,10 @@ interface ExperienceImage {
   src: string;
   href?: string;
   alt?: string;
+  /** "cover" (default) fills the 16:9 frame; "contain" shows the whole image. */
+  fit?: "cover" | "contain";
+  /** Frame colour behind a "contain" image, e.g. "#fff" for a logo on white. */
+  background?: string;
 }
 
 const { index } = Astro.props;
@@ -34,7 +38,22 @@ const hostname = (url: string) => new URL(url).hostname.replace(/^www\./, "");
               <div class="meta">
                 <span class="marker" data-reveal>
                   {item.logo ? (
-                    <Image src={asset(item.logo)} alt="" width={96} height={96} class="h-full w-full rounded-full object-contain" />
+                    (() => {
+                      // Square logos fill the circle; any other shape (e.g. the
+                      // tall NUS crest) is scaled down whole, with breathing room,
+                      // instead of being cropped to a square.
+                      const logo = asset(item.logo);
+                      const ratio = logo.width / logo.height;
+                      const square = ratio > 0.95 && ratio < 1.05;
+                      return (
+                        <Image
+                          src={logo}
+                          alt=""
+                          width={96}
+                          class:list={["h-full w-full object-contain", square ? "rounded-full" : "p-2.5"]}
+                        />
+                      );
+                    })()
                   ) : (
                     <Icon name="briefcase" size={22} />
                   )}
@@ -70,7 +89,8 @@ const hostname = (url: string) => new URL(url).hostname.replace(/^www\./, "");
                           width={960}
                           widths={[400, 640, 960]}
                           sizes="(max-width: 640px) 100vw, 340px"
-                          class="h-44 w-full object-cover md:h-52 lg:h-60"
+                          class:list={["aspect-video h-auto w-full", image.fit === "contain" ? "object-contain" : "object-cover"]}
+                          style={image.background ? `background-color: ${image.background}` : undefined}
                         />
                       );
                       return (
